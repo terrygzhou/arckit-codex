@@ -199,12 +199,16 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | REQ | `ARC-*-REQ-*.md` | Requirements |
 | | STKE | `ARC-*-STKE-*.md` | Stakeholder Drivers |
 | | RSCH | `ARC-*-RSCH-*.md` | Research Findings |
+| **Discovery (Community-contributed — TOGAF ADM Overlay)** | | | |
+| | DISC | `ARC-*-DISC-*.md` | Discovery |
 | **Planning** | | | |
 | | SOBC | `ARC-*-SOBC-*.md` | Strategic Outline Business Case |
 | | PLAN | `ARC-*-PLAN-*.md` | Project Plan |
 | | ROAD | `ARC-*-ROAD-*.md` | Roadmap |
 | | STRAT | `ARC-*-STRAT-*.md` | Architecture Strategy |
 | | BKLG | `ARC-*-BKLG-*.md` | Product Backlog |
+| **Planning (Community-contributed — OAA Overlay)** | | | |
+| | OASTR | `ARC-*-OASTR-*.md` | Agile Strategy |
 | **Architecture** | | | |
 | | PRIN | `ARC-*-PRIN-*.md` | Architecture Principles |
 | | HLDR | `ARC-*-HLDR-*.md` | High-Level Design Review |
@@ -225,10 +229,17 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | APPR | `ARC-*-APPR-*.md` | Application Rationalisation |
 | | TRANS | `ARC-*-TRANS-*.md` | Transition Architecture |
 | | REPO | `ARC-*-REPO-*.md` | Architecture Repository |
+| | TECH | `ARC-*-TECH-*.md` | Technology Architecture |
 | **Architecture (Community-contributed — AI Agent Architecture Overlay)** | | | |
 | | AAGI | `ARC-*-AAGI-*.md` | Agent Inventory |
 | | AAGR | `ARC-*-AAGR-*.md` | Agent Architecture Specification |
 | | AAIN | `ARC-*-AAIN-*.md` | Agent Integration Architecture |
+| **Architecture (Community-contributed — OAA Overlay)** | | | |
+| | OAPR | `ARC-*-OAPR-*.md` | Product Architecture |
+| | OAAL | `ARC-*-OAAL-*.md` | O-AA ADM Lite |
+| **Governance (Community-contributed — OAA Overlay)** | | | |
+| | OASEC | `ARC-*-OASEC-*.md` | Agile Security |
+| | OAGOV | `ARC-*-OAGOV-*.md` | Agile Governance |
 | **Governance** | | | |
 | | RISK | `ARC-*-RISK-*.md` | Risk Register |
 | | TRAC | `ARC-*-TRAC-*.md` | Traceability Matrix |
@@ -236,6 +247,9 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | ANAL | `ARC-*-ANAL-*.md` | Analysis Report |
 | | CONF | `ARC-*-CONF-*.md` | Conformance Assessment |
 | | GAPS | `ARC-*-GAPS-*.md` | Gap Analysis |
+| | CDAU | `ARC-*-CDAU-*.md` | Codebase Audit |
+| | GLOS | `ARC-*-GLOS-*.md` | Glossary |
+| | FWRK | `ARC-*-FWRK-*.md` | Framework Overview |
 | **Governance (Community-contributed — TOGAF ADM Overlay)** | | | |
 | | GAPA | `ARC-*-GAPA-*.md` | TOGAF Gap Analysis |
 | | BORD | `ARC-*-BORD-*.md` | Architecture Board Charter |

@@ -1294,7 +1294,7 @@ Create a public document (visible to assessment team) showing:
 4. Use checklist to track completion of preparation tasks
 
 **Questions or Feedback**:
-- Report issues: https://github.com/tractorjuice/arc-kit/issues
+- Report issues: https://github.com/terrygzhou/arc-kit/issues
 - Contribute improvements: PRs welcome
 - Share your assessment experience: Help improve this command for others
 

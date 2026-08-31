@@ -10,10 +10,10 @@ How to upgrade the ArcKit CLI and update your existing projects.
 
 ```bash
 # If installed with pip:
-pip install --upgrade git+https://github.com/tractorjuice/arc-kit.git
+pip install --upgrade git+https://github.com/terrygzhou/arc-kit.git
 
 # If installed with uv:
-uv tool upgrade arckit-cli --from git+https://github.com/tractorjuice/arc-kit.git
+uv tool upgrade arckit-cli --from git+https://github.com/terrygzhou/arc-kit.git
 
 # Verify the new version:
 arckit --help

@@ -576,7 +576,7 @@ Lay_Right(web, api)
 - **C4 Model**: https://c4model.com/
 - **C4-PlantUML Library**: https://github.com/plantuml-stdlib/C4-PlantUML
 - **PlantUML Server**: https://www.plantuml.com/plantuml/uml/
-- **ArcKit Repository**: https://github.com/tractorjuice/arc-kit
+- **ArcKit Repository**: https://github.com/terrygzhou/arc-kit
 
 ## External References
 

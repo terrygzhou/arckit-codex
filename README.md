@@ -22,9 +22,9 @@ The ArcKit CLI scaffolds a complete project with skills, agents, and MCP config 
 
 ```bash
 # Install the CLI
-pip install git+https://github.com/tractorjuice/arc-kit.git
+pip install git+https://github.com/terrygzhou/arc-kit.git
 # Or with uv
-uv tool install arckit-cli --from git+https://github.com/tractorjuice/arc-kit.git
+uv tool install arckit-cli --from git+https://github.com/terrygzhou/arc-kit.git
 
 # Create a new project
 arckit init my-project --ai codex

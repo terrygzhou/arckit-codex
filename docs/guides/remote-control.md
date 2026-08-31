@@ -147,5 +147,5 @@ Here's a practical workflow combining ArcKit and Remote Control for a typical ar
 ## Learn More
 
 - [Claude Code Remote Control Documentation](https://code.claude.com/docs/en/remote-control)
-- [ArcKit Plugin Installation Guide](https://github.com/tractorjuice/arc-kit)
+- [ArcKit Plugin Installation Guide](https://github.com/terrygzhou/arc-kit)
 - [Claude Mobile App — iOS](https://apps.apple.com/us/app/claude-by-anthropic/id6473753684) | [Android](https://play.google.com/store/apps/details?id=com.anthropic.claude)

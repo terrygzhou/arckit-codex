@@ -1,10 +1,10 @@
 {
   "name": "arckit-codex",
-  "version": "6.2.0",
+  "version": "6.7.5",
   "description": "Enterprise architecture governance, procurement, research, and delivery workflows for Codex.",
   "author": {
     "name": "ArcKit",
-    "url": "https://github.com/tractorjuice/arc-kit"
+    "url": "https://github.com/terrygzhou/arc-kit"
   },
   "homepage": "https://github.com/tractorjuice/arckit-codex",
   "repository": "https://github.com/tractorjuice/arckit-codex",
@@ -30,7 +30,7 @@
       "Write",
       "MCP"
     ],
-    "websiteURL": "https://github.com/tractorjuice/arc-kit",
+    "websiteURL": "https://github.com/terrygzhou/arc-kit",
     "defaultPrompt": [
       "Use ArcKit to start an architecture governance project.",
       "Use ArcKit to assess requirements, risks, decisions, and procurement options."

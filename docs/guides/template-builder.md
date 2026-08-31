@@ -88,7 +88,7 @@ Share this folder via Git, email, or any file transfer method.
 
 To submit a community template for official ArcKit inclusion:
 
-1. Fork [tractorjuice/arc-kit](https://github.com/tractorjuice/arc-kit)
+1. Fork [terrygzhou/arc-kit](https://github.com/terrygzhou/arc-kit)
 2. Copy template to `.arckit/templates/` and `plugins/arckit-claude/templates/`
 3. Move command from `.claude/commands/` to `plugins/arckit-claude/commands/` and drop the `arckit.community.` prefix
 4. Change `Template Origin: Community` to `Template Origin: Official`

@@ -204,7 +204,7 @@ This is a community template. You can:
 To share this template:
 
 1. Copy the bundle from `.arckit/community/{name}/` (if generated)
-2. Share via Git or submit a PR to [tractorjuice/arc-kit](https://github.com/tractorjuice/arc-kit)
+2. Share via Git or submit a PR to [terrygzhou/arc-kit](https://github.com/terrygzhou/arc-kit)
 
 For official promotion: rename the generated skill if needed, change banner to `Template Origin: Official`, and open a PR.
 
@@ -279,7 +279,7 @@ Copy the files to your ArcKit project:
 
 To propose this template for official inclusion:
 
-1. Fork [tractorjuice/arc-kit](https://github.com/tractorjuice/arc-kit)
+1. Fork [terrygzhou/arc-kit](https://github.com/terrygzhou/arc-kit)
 2. Copy template to `.arckit/templates-custom/` and `arckit-claude/templates/`
 3. Rename or relocate the community skill if promoting it to an official ArcKit command
 4. Change `Template Origin: Community` to `Template Origin: Official`
@@ -320,7 +320,7 @@ After writing all files, show ONLY this summary:
 ### How to Share
 
 - Share the `.arckit/community/{name}/` bundle via Git
-- Submit a PR to [tractorjuice/arc-kit](https://github.com/tractorjuice/arc-kit) for official promotion
+- Submit a PR to [terrygzhou/arc-kit](https://github.com/terrygzhou/arc-kit) for official promotion
 
 ### Origin Model
 

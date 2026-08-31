@@ -722,7 +722,7 @@ function buildLlmsTxt(manifest, repoInfo, version) {
     lines.push(`- [Source repository](${repoInfo.repoUrl}): GitHub repo with full artifact history.`);
   }
   lines.push('- [ArcKit project site](https://arckit.org): Command reference, guides, and distribution packages.');
-  lines.push('- [ArcKit on GitHub](https://github.com/tractorjuice/arc-kit): Plugin source, issues, and releases.');
+  lines.push('- [ArcKit on GitHub](https://github.com/terrygzhou/arc-kit): Plugin source, issues, and releases.');
   if (manifest.globalExternal && manifest.globalExternal.length > 0) {
     for (const doc of manifest.globalExternal) {
       lines.push(`- [${doc.title}](${mdUrl(doc.path)}): External reference (${doc.type}).`);
