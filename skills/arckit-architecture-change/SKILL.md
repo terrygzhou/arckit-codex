@@ -59,6 +59,10 @@ Change requests are **multi-instance** documents (like ADRs). Find the next avai
 
 ### 3. Read the Template (with user override support)
 
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+
 **Read the template** (with user override support):
 
 - **First**, check if `.arckit/templates-custom/architecture-change-template.md` exists in the project root

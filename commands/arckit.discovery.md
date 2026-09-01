@@ -25,6 +25,11 @@ analysis and rationalization.
 5. **Technology Stack** — Infrastructure, platforms, hosting environments
 6. **Known Constraints** — Legacy dependencies, compliance requirements, budget limits
 
+## Process
+
+1. **Run the intake interview**: Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the structure below (the effective template) and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+2. **Render `DISC.md`** following the structure below; render any skipped MANDATORY input as a quoted `TBD` marker and list it under "Unresolved fields" in the summary.
+
 ## Structure
 
 ```markdown
@@ -50,6 +55,23 @@ analysis and rationalization.
 ### Known Constraints
 - [Legacy dependencies, compliance requirements, budget limits]
 ```
+
+## Interview Questions (TOGAF 10 — current-state discovery)
+
+The intake interview for this command asks the questions below before rendering
+`DISC.md`. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact.
+
+- **Business context:** What is the strategic direction, and what are the key drivers and the current operating model?
+- **Capability state:** Which capabilities exist today, at what maturity, and which are obsolete or legacy?
+- **Application landscape:** Which applications exist, who owns them, and which are deprecated or planned for retirement?
+- **Data state:** Which data systems exist, who owns the data, and what classification levels apply?
+- **Technology baseline:** Which infrastructure, platforms, and hosting environments are in use?
+- **Constraints:** What legacy dependencies, compliance requirements, and budget limits constrain any future state?
+- **Pain points:** Where are the most acute operational, data, or technology problems today?
 
 ## Dependencies
 

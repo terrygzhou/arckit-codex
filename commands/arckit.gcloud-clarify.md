@@ -250,6 +250,10 @@ The footer should be populated with:
 
 ---
 
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, ask only what remains unknown (one question at a time, each skippable), and persist answers.
+
 ### 6. Generate Output Document
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **GCLC** per-type checks pass. Fix any failures before proceeding.

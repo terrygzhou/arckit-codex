@@ -14,7 +14,7 @@ $ARGUMENTS
 
 > **Note**: Before generating, scan `projects/` for existing project directories. For each project, list all `ARC-*.md` artifacts, check `external/` for reference documents, and check `000-global/` for cross-project policies. If no external docs exist but they would improve output, ask the user.
 
-### MANDATORY (warn if missing)
+### MANDATORY (stop if missing — generate upstream artefact first)
 
 - **APP** (Application Portfolio) — Extract: Application inventory, current state, capabilities served, technology stack, lifecycle status, business criticality, cost data, vendor dependencies
   - If missing: STOP and ask user to run `/arckit:application-inventory` (or equivalent APP command) first. Rationalisation requires an existing application inventory.
@@ -51,6 +51,10 @@ Identify the target project from the hook context or user input. Extract the pro
 - Note any applications already flagged for retirement or replacement
 
 ### 3. Read the Template
+
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
 
 **Read the template** (with user override support):
 

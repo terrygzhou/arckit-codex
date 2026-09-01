@@ -27,7 +27,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 ### 2. Prerequisites: Read Architecture Artifacts
 
-**MANDATORY** (warn if missing):
+**MANDATORY** (stop if missing — generate upstream artefact first):
 
 - **PRIN** (Architecture Principles, in `000-global`) — Extract: All principles, governance standards, decision rights, compliance requirements
   - If missing: STOP and ask user to run `/arckit:principles` first. The Architecture Board cannot operate without defined principles.
@@ -44,6 +44,10 @@ Identify the target project from the hook context. If the user specifies a proje
   - If missing: note in assumptions that design governance could not be assessed
 
 ### 3. Read Architecture Board Template
+
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
 
 **Read the template** (with user override support):
 

@@ -108,6 +108,10 @@ This command creates a **Strategic Outline Business Case (SOBC)** following HM T
 
 7. **Generate comprehensive SOBC**:
 
+   **Run the intake interview**:
+
+   - Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, ask only what remains unknown (one question at a time, each skippable), and persist answers.
+
    **Read the template** (with user override support):
    - **First**, check if `.arckit/templates-custom/sobc-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)

@@ -15,7 +15,7 @@ $ARGUMENTS
 
 > **Note**: Before generating, scan `projects/` for existing project directories. For each project, list all `ARC-*.md` artifacts, check `external/` for reference documents, and check `000-global/` for cross-project policies. If no external docs exist but they would improve output, ask the user.
 
-**MANDATORY** (warn if missing):
+**MANDATORY** (stop if missing — generate upstream artefact first):
 
 - **PRIN** (Architecture Principles, in 000-global) — Extract: Guiding principles, decision framework, technology standards, compliance requirements
   - If missing: STOP and ask user to run `$arckit-principles` first. The repository must be grounded in architecture principles.
@@ -64,6 +64,10 @@ This command operates at **global scope** by default. The repository synthesises
 - Set `PROJECT_ID` = `000` for global repository, or the user-specified project ID for project-scoped repository
 
 ### 2. Read Template
+
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
 
 **Read the template** (with user override support):
 

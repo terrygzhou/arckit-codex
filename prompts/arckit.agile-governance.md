@@ -36,11 +36,12 @@ Use this command when **any** of the following conditions are met:
 
 > **Note**: Before generating, scan `projects/` for existing project directories. For each project, list all `ARC-*.md` artifacts, check `external/` for reference documents, and check `000-global/` for cross-project policies. If no external docs exist but they would improve output, ask the user.
 
-**RECOMMENDED** (read if available, note if missing):
+**MANDATORY** (stop if missing — generate upstream artefact first):
 
 - **PRIN** (Architecture Principles, in 000-global) — Extract: Governance principles, decision authority, compliance obligations
+  - If missing: STOP and ask user to run `/arckit:principles` first. The OAA artefact must be grounded in architecture principles.
 
-  - If missing: warn user to run `/arckit:principles` first
+**RECOMMENDED** (read if available, note if missing):
 
 - **OAAL** (O-AA ADM Lite) — Extract: Sprint plan, governance cadence, compliance mapping
 
@@ -78,6 +79,12 @@ Identify the target project from the hook context. If the user specifies a proje
 6. Set `PROJECT_ID` = the 3-digit number, `PROJECT_PATH` = the new directory path
 
 ### 2. Read Template
+
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+
+- Load the OAA discovery-dimension checklist `.arckit/references/intake-discovery-dimensions.md` (D1–D10) and use it as the canonical coverage floor in addition to the shared block's §2 template-derived questions: a dimension resolvable from existing artefacts, `.arckit/intake/`, `user_config`, or `shared.json` is surfaced prefilled for confirmation/override (ask-always, answer-optional); a dimension with no source is asked as a grouped, skippable question (a skipped question renders a `TBD` marker); the checklist adds no diagram or output mandate.
 
 **Read the template** (with user override support):
 

@@ -35,11 +35,12 @@ Use this command when **any** of the following conditions are met:
 
 > **Note**: Before generating, scan `projects/` for existing project directories. For each project, list all `ARC-*.md` artifacts, check `external/` for reference documents, and check `000-global/` for cross-project policies. If no external docs exist but they would improve output, ask the user.
 
-**RECOMMENDED** (read if available, note if missing):
+**MANDATORY** (stop if missing — generate upstream artefact first):
 
 - **PRIN** (Architecture Principles, in 000-global) — Extract: Guiding principles, decision framework, technology standards
+  - If missing: STOP and ask user to run `$arckit-principles` first. Even O-AA Lite must be grounded in established architecture principles.
 
-  - If missing: warn user to run `$arckit-principles` first. Even O-AA Lite benefits from established principles.
+**RECOMMENDED** (read if available, note if missing):
 
 - **ADMP** (ADM Preliminary / Architecture Vision) — Extract: Existing scope, drivers, constraints if a preliminary ADM was already done
 
@@ -64,7 +65,17 @@ Identify the target project from the hook context. If the user specifies a proje
 5. Also create `projects/{NNN}-{slug}/external/README.md` with a note to place external reference documents here
 6. Set `PROJECT_ID` = the 3-digit number, `PROJECT_PATH` = the new directory path
 
-### 2. Read Template
+### 2. Load Mermaid Syntax References
+
+Read `.arckit/skills/mermaid-syntax/references/flowchart.md` for official Mermaid syntax — flowchart node shapes and edge labels, used for the data-flow-diagram.mmd deliverable. Diagrams in this artefact MUST follow the reference syntax.
+
+### 3. Read Template
+
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+
+- Load the OAA discovery-dimension checklist `.arckit/references/intake-discovery-dimensions.md` (D1–D10) and use it as the canonical coverage floor in addition to the shared block's §2 template-derived questions: a dimension resolvable from existing artefacts, `.arckit/intake/`, `user_config`, or `shared.json` is surfaced prefilled for confirmation/override (ask-always, answer-optional); a dimension with no source is asked as a grouped, skippable question (a skipped question renders a `TBD` marker); the checklist adds no diagram or output mandate.
 
 **Read the template** (with user override support):
 
@@ -76,7 +87,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `$arckit-customize oaa-adm-lite`
 
-### 3. Sprint Map
+### 4. Sprint Map
 
 The O-AA ADM Lite maps the TOGAF ADM cycle to agile sprints:
 
@@ -88,7 +99,7 @@ The O-AA ADM Lite maps the TOGAF ADM cycle to agile sprints:
 | Sprint 3 | ADM-E + F | Implementation Wave | 2 weeks | `implementation-strategy.yaml` |
 | Sprint 4+ | ADM-G + H | Governance + Change | Ongoing | `governance-report.yaml`, `change-request.yaml` |
 
-### 4. O-AA Axiom Alignment
+### 5. O-AA Axiom Alignment
 
 Every O-AA deliverable must reference the relevant O-AA axioms:
 
@@ -106,7 +117,7 @@ Every O-AA deliverable must reference the relevant O-AA axioms:
 
 - **Axiom 7:** "Architecture is the property of the whole organisation."
 
-### 5. Shared Schema Definitions
+### 6. Shared Schema Definitions
 
 O-AA commands reuse schema definitions across TOGAF and O-AA workflows:
 
@@ -122,7 +133,7 @@ Validate outputs against shared schemas:
 
 - `schemas/implementation-strategy.json` — Implementation strategy schema
 
-### 6. Generate O-AA ADM Lite Document
+### 7. Generate O-AA ADM Lite Document
 
 Create the O-AA ADM Lite document following the template structure.
 
@@ -178,11 +189,11 @@ Create the O-AA ADM Lite document following the template structure.
 
 - Architecture change requests via `$arckit-architecture-change`
 
-### 7. Quality Gate
+### 8. Quality Gate
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** pass. Fix any failures before proceeding.
 
-### 8. Write the Document
+### 9. Write the Document
 
 **IMPORTANT**: The O-AA ADM Lite document will be a substantial document (typically 150-300 lines). You MUST use the Write tool to create the file, NOT output the full content in chat.
 
@@ -192,7 +203,7 @@ Create the file at:
 projects/{P}/ARC-{P}-OAAL-v1.0.md
 ```text
 
-### 9. Show Summary to User
+### 10. Show Summary to User
 
 After writing the file, show a concise summary (NOT the full document):
 

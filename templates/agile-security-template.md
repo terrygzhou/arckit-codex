@@ -2,6 +2,25 @@
 
 > Security embedded in every sprint/iteration. Risk-based testing automation, compliance-as-code integration, continuous validation replacing phase-gate checkpoints. Aligned with O-AA Security Playbook (G216).
 
+## Intake Interview Questions
+
+The template-driven intake interview asks the questions below before rendering this
+artefact. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact. Sources: TOGAF Standard, 10th Edition
+(discovery dimensions per ADM phase) and the Open Agile Architecture Standard
+(C208, The Open Group, 2020), with its Security Playbook (G216) where applicable;
+each O-AA question below is cited to the C208 section it draws on.
+
+### Intake questions (O-AA agile security)
+
+- **Embedded security:** What security stories and estimates enter sprint planning, and who owns them?
+- **Compliance gates:** Which compliance-as-code gates run in CI/CD, and which regulation/standard each enforces?
+- **Sprint-gate validation:** What evidence closes the sprint security gate (tests, attestations, reviews)?
+- **Metrics:** Which security KPIs feed the metrics dashboard, and what are their targets?
+
 | Field | Value |
 |---|---|
 | **Template** | Agile Security Architecture |
@@ -14,6 +33,19 @@
 | **Author** | Enterprise Architecture Lead |
 | **Prerequisites** | ADR-001 (Executable TOGAF ADM), ADR-003 (AI Governance Framework) |
 | **Integrates with** | `governance-report.yaml`, `compliance-mapping.yaml`, ADR-005 (Compliance Validation Pipeline) |
+
+### O-AA Standard (C208) interview questions
+
+Grounded in the O-AA Security Playbook (G216, The Open Group, 2021), which
+aligns to the O-AA Standard (C208); each answer feeds the agile security
+architecture below.
+
+- **Minimum Security Architecture (Playbook §2):** What is the MSA that guides this sprint's MVP, and where are the security sub-system boundaries (each with its own lifecycle)?
+- **Layers of controls (Playbook §4.1):** Which of the five layers (assets, security systems, computing/network, physical, personnel) are in scope, and which protection objective (confidentiality/integrity/availability) each serves?
+- **Risk appetite (Playbook §4):** What is the defined risk threshold — and the risk-based scan thresholds that gate a sprint (vulnerability, dependency, secret) — quantified via Open FAIR (Loss Event Frequency × Loss Magnitude) or a documented methodology?
+- **DevSecOps pipeline (Playbook §4.2):** Where do threat-modeling, static analysis, dynamic scanning, and penetration testing sit, and what gates each stage?
+- **Roles (Playbook §3):** Who is the agile security architect/champion, and how do they team with risk management, cloud/network providers, and enterprise security?
+- **Security-architecture quality (Playbook §5):** Is the architecture deployable today, testable/falsifiable, roll-backable, and does it provide built-in monitoring and traceability?
 
 ---
 

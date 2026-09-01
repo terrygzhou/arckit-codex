@@ -6,6 +6,24 @@ templateVersion: "1.0"
 
 # Transition Architecture
 
+## Intake Interview Questions
+
+The template-driven intake interview asks the questions below before rendering this
+artefact. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact. Sources: TOGAF Standard, 10th Edition
+(discovery dimensions per ADM phase) and the O-AA / agentic outcome dimensions below.
+
+### Intake questions (TOGAF 10 — ADM Phases E-F)
+
+- **Milestones:** What are the transition milestones / release waves, with target dates?
+- **Work packages:** Which work packages close which gaps, and what is their dependency order?
+- **Exit criteria:** What must be true at each milestone gate to proceed?
+- **Enablers:** What organizational enablers (training, funding, governance) are required in transition?
+- **Risk:** What is the top transition risk, and what is its mitigation?
+
 ## Document Control
 
 | Field | Value |

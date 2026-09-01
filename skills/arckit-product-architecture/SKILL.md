@@ -37,11 +37,12 @@ Use this command when **any** of the following conditions are met:
 
 > **Note**: Before generating, scan `projects/` for existing project directories. For each project, list all `ARC-*.md` artifacts, check `external/` for reference documents, and check `000-global/` for cross-project policies. If no external docs exist but they would improve output, ask the user.
 
-**RECOMMENDED** (read if available, note if missing):
+**MANDATORY** (stop if missing — generate upstream artefact first):
 
 - **PRIN** (Architecture Principles, in 000-global) — Extract: Product architecture principles, technology standards, compliance requirements
+  - If missing: STOP and ask user to run `$arckit-principles` first. The OAA artefact must be grounded in architecture principles.
 
-  - If missing: warn user to run `$arckit-principles` first
+**RECOMMENDED** (read if available, note if missing):
 
 - **OAAL** (O-AA ADM Lite) — Extract: Sprint plan, vision, scope, success criteria
 
@@ -70,7 +71,17 @@ Identify the target project from the hook context. If the user specifies a proje
 5. Also create `projects/{NNN}-{slug}/external/README.md` with a note to place external reference documents here
 6. Set `PROJECT_ID` = the 3-digit number, `PROJECT_PATH` = the new directory path
 
-### 2. Read Template
+### 2. Load Mermaid Syntax References
+
+Read `.arckit/skills/mermaid-syntax/references/c4.md` for official Mermaid syntax — C4 component diagram syntax. Diagrams in this artefact MUST follow the reference syntax.
+
+### 3. Read Template
+
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+
+- Load the OAA discovery-dimension checklist `.arckit/references/intake-discovery-dimensions.md` (D1–D10) and use it as the canonical coverage floor in addition to the shared block's §2 template-derived questions: a dimension resolvable from existing artefacts, `.arckit/intake/`, `user_config`, or `shared.json` is surfaced prefilled for confirmation/override (ask-always, answer-optional); a dimension with no source is asked as a grouped, skippable question (a skipped question renders a `TBD` marker); the checklist adds no diagram or output mandate.
 
 **Read the template** (with user override support):
 
@@ -82,7 +93,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `$arckit-customize product-architecture`
 
-### 3. O-AA Product Architecture Framework
+### 4. O-AA Product Architecture Framework
 
 O-AA Learning Unit 7 (Product Architecture) establishes that:
 
@@ -94,7 +105,7 @@ O-AA Learning Unit 7 (Product Architecture) establishes that:
 
 - **Backlog-driven**: Architecture evolves through the product backlog, not separate architecture workstreams
 
-### 4. Shared Schema Definitions
+### 5. Shared Schema Definitions
 
 Product architecture commands reuse schema definitions:
 
@@ -104,7 +115,7 @@ Product architecture commands reuse schema definitions:
 
 - **`implementation-strategy.yaml`** — Implementation waves (shared with `$arckit-transition-architecture`)
 
-### 5. Generate Product Architecture Document
+### 6. Generate Product Architecture Document
 
 Create the Product Architecture document following the template structure.
 
@@ -156,11 +167,11 @@ Create the Product Architecture document following the template structure.
 
 - Data flow and API boundaries
 
-### 6. Quality Gate
+### 7. Quality Gate
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** pass. Fix any failures before proceeding.
 
-### 7. Write the Document
+### 8. Write the Document
 
 **IMPORTANT**: The Product Architecture document will be a substantial document (typically 200-350 lines). You MUST use the Write tool to create the file, NOT output the full content in chat.
 
@@ -170,7 +181,7 @@ Create the file at:
 projects/{P}/ARC-{P}-OAPR-v1.0.md
 ```text
 
-### 8. Show Summary to User
+### 9. Show Summary to User
 
 After writing the file, show a concise summary (NOT the full document):
 

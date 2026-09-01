@@ -6,6 +6,41 @@
 > **TOGAF Mapping:** ADM Phase B (Business) + Phase C (Information Systems) + Phase E (Opportunities)
 > **Trigger:** Use when architecture work targets a specific product (not enterprise-wide). Product-centric, outcome-driven, team-led.
 
+## Intake Interview Questions
+
+The template-driven intake interview asks the questions below before rendering this
+artefact. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact. Sources: TOGAF Standard, 10th Edition
+(discovery dimensions per ADM phase) and the Open Agile Architecture Standard
+(C208, The Open Group, 2020), with its Security Playbook (G216) where applicable;
+each O-AA question below is cited to the C208 section it draws on.
+
+### Intake questions (O-AA product architecture + TOGAF 10 discovery floor)
+
+- **Mission:** What is the product mission in one sentence?
+- **Outcome:** What are the Value / Outcome / Experience / Adoption targets and their measurements?
+- **Principles:** Which product architecture principles (grounded in O-AA axioms) will the team follow?
+- **Team:** What is the cross-functional team composition, and who is the architect on it?
+- **Backlog:** Which epics and architecture items are already on the product backlog?
+- **Roadmap:** What do the next release waves target, and what gate criteria apply?
+- **Current state (TOGAF 10 D5):** What is the product's current state (systems, data, operating model) that the roadmap moves away from?
+- **Pain points (TOGAF 10 D8):** What are the sharpest user or delivery pain points this architecture must relieve?
+
+### O-AA Standard (C208) interview questions
+
+Grounded in the Open Agile Architecture Standard (C208, The Open Group, 2020)
+constructs; each answer feeds the product architecture below.
+
+- **Partitioning (C208 §14.1):** How is the product's functional elements mapped to its building blocks/components, and what does the Design Structure Matrix show about coupling?
+- **Modularity–integrality trade-off (C208 §14.2–14.3):** Where do you favour modularity (loose coupling, team autonomy) over integrality (performance), and what propagation cost do you accept?
+- **Product platforms (C208 §14.4):** Is this a product platform/product line? Which shared components and preplanned variation mechanisms (parameterization, inheritance) does it expose?
+- **Decision typing (C208 §5.2):** Which decisions are Type 1 (one-way, hard to reverse) vs Type 2 (two-way), and at what scope (team / team-of-teams) is each decided?
+- **ADRs (C208 §5.3):** Which architecturally significant decisions need an Architecture Decision Record (context, decision, consequences, status), and who owns the ADR?
+- **Time horizon (C208 §5.1):** Is this enterprise architecture (long horizon) or product/solution architecture (release horizon), and how do the two stay aligned?
+
 ---
 
 ## 1. Product Mission and Outcome

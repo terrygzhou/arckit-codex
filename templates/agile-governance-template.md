@@ -2,6 +2,25 @@
 
 > Replaces the centralised Architecture Review Board with a distributed governance model. Governance is embedded in sprint rhythm, not a periodic gate.
 
+## Intake Interview Questions
+
+The template-driven intake interview asks the questions below before rendering this
+artefact. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact. Sources: TOGAF Standard, 10th Edition
+(discovery dimensions per ADM phase) and the Open Agile Architecture Standard
+(C208, The Open Group, 2020), with its Security Playbook (G216) where applicable;
+each O-AA question below is cited to the C208 section it draws on.
+
+### Intake questions (O-AA agile governance)
+
+- **Review cadence:** What does the sprint architecture review (pre/post sprint) check, and who runs it?
+- **Debt:** What architecture debt categories exist, and what threshold triggers a debt backlog entry?
+- **Health:** What does the quarterly architecture health rubric measure, and who scores it?
+- **Compliance:** Which continuous compliance checks (compliance-as-code) gate the pipeline, and where do they run?
+
 | Field | Value |
 |---|---|
 | **Issue** | `${user_config.project_issue_prefix}-128` — Agile Governance Cadence Template |
@@ -12,6 +31,18 @@
 | **Author** | Enterprise Architecture Lead |
 | **Owner** | Distributed (Team Architect + AI Safety Architect + Legal Counsel) |
 | **Replaces** | Centralised Architecture Review Board (where applicable) |
+
+### O-AA Standard (C208) interview questions
+
+Grounded in the Open Agile Architecture Standard (C208, The Open Group, 2020)
+governance constructs; each answer feeds the distributed governance cadence
+below.
+
+- **Decision rights (C208 §8):** Which decision rights (authority) are allocated to which teams — architect, tech lead, compliance owner — and is accountability matched to each?
+- **Guardrails over standards (C208 §8.2–8.3):** Which standards become guardrails (policy intent) that teams apply bottom-up, rather than a top-down approved-catalog mandate?
+- **Integrated business+IT governance (C208 §8.3):** How do Quarterly Business Reviews, sponsor resource-release, and post-mortems operate across the tribes, and how is IT investment treated as a subset of business investment?
+- **Alignment levers (C208 §8.3):** What shared purpose, shared consciousness, forcing functions, and feedback loops keep autonomous teams aligned?
+- **Model scope (C208 §8):** Which governance model is targeted — digital governance or TOGAF architecture governance — and what formally replaces the classical architecture review board?
 
 ## Why This Replaces the ARB
 

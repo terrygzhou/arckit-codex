@@ -6,6 +6,24 @@ templateVersion: "1.0"
 
 # Business Capability Map
 
+## Intake Interview Questions
+
+The template-driven intake interview asks the questions below before rendering this
+artefact. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact. Sources: TOGAF Standard, 10th Edition
+(discovery dimensions per ADM phase) and the O-AA / agentic outcome dimensions below.
+
+### Intake questions (TOGAF 10 — ADM Phase B)
+
+- **Business outcomes:** Which strategic goals or outcomes must the target capability model enable?
+- **Current capabilities:** Which business capabilities exist today, at what maturity, and which are obsolete?
+- **Gaps:** Which capabilities are needed to reach the target state but are missing or weak?
+- **Value stream:** Which value-stream steps (customer journey stages) do the capabilities serve?
+- **Target state:** What are the target capability layers (strategic / business / shared / enabling) and their owners?
+
 ## Document Control
 
 | Field | Value |

@@ -1,13 +1,13 @@
 {
   "name": "arckit-codex",
-  "version": "6.7.5",
+  "version": "6.8.0",
   "description": "Enterprise architecture governance, procurement, research, and delivery workflows for Codex.",
   "author": {
     "name": "ArcKit",
     "url": "https://github.com/terrygzhou/arc-kit"
   },
-  "homepage": "https://github.com/tractorjuice/arckit-codex",
-  "repository": "https://github.com/tractorjuice/arckit-codex",
+  "homepage": "https://github.com/terrygzhou/arckit-codex",
+  "repository": "https://github.com/terrygzhou/arckit-codex",
   "license": "MIT",
   "keywords": [
     "enterprise-architecture",

@@ -6,6 +6,24 @@ templateVersion: "1.0"
 
 # Application Inventory
 
+## Intake Interview Questions
+
+The template-driven intake interview asks the questions below before rendering this
+artefact. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact. Sources: TOGAF Standard, 10th Edition
+(discovery dimensions per ADM phase) and the O-AA / agentic outcome dimensions below.
+
+### Intake questions (TOGAF 10 — ADM Phase C, application view)
+
+- **Portfolio:** Which applications exist today? For each: owner, status (active/deprecated/planned), and lifecycle stage.
+- **Fit:** Which applications are fit-for-purpose, and which are workaround or shadow systems?
+- **Dependencies:** Which applications integrate with which, and through what patterns (API, batch, file)?
+- **Data flows:** Which applications produce or consume the key data assets?
+- **Pain points:** Where do application-level pain points, license risk, or security debt surface?
+
 ## Document Control
 
 | Field | Value |

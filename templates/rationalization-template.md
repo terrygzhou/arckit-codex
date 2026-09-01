@@ -6,6 +6,24 @@ templateVersion: "1.0"
 
 # Application Rationalisation
 
+## Intake Interview Questions
+
+The template-driven intake interview asks the questions below before rendering this
+artefact. Every question below is always put to the user for their input, one
+question at a time, and is prefilled where answerable from existing artefacts,
+saved intake, onboarding data, or organisation config so the user can confirm or
+override it. Each question is **optional**: a skipped question renders as a
+`TBD` marker in the artefact. Sources: TOGAF Standard, 10th Edition
+(discovery dimensions per ADM phase) and the O-AA / agentic outcome dimensions below.
+
+### Intake questions (TOGAF 10 — application rationalization)
+
+- **Decision basis:** On what criteria (value, fit, cost, risk) will build / buy / keep / retire decisions be made?
+- **Retire candidates:** Which applications are strong retire candidates, and what are the retirement risks (data, integrations, users)?
+- **Consolidation:** Which overlapping applications can be consolidated, and into what?
+- **Cost drivers:** Which license, hosting, or maintenance costs dominate, and what does the rationalization target save?
+- **Sequence:** What order and timeline will retire/replace work follow?
+
 ## Document Control
 
 | Field | Value |
