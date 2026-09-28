@@ -49,7 +49,7 @@ $ARGUMENTS
 
    **Run the intake interview**:
 
-   - Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, ask only what remains unknown (one question at a time, each skippable), and persist answers.
+   - Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 4. **Read the template** (with user override support):
    - **First**, check if `.arckit/templates-custom/requirements-template.md` exists in the project root

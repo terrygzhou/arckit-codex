@@ -109,6 +109,8 @@ Apply these principles when generating diagrams in Step 3. In particular:
 
 ## Step 2: Determine the Diagram Type
 
+> **ArchiMate note:** if the requested diagram is ArchiMate-representable (a layer/tier, capability, service, application or technology component, or motivation — driver/goal/constraint) or an ArchiMate view should be added, render it with **PlantUML ArchiMate** instead of C4/Mermaid, per the Diagram Production Policy in `skills/plantuml-syntax/references/archimate.md` (inline PlantUML source, self-contained `.svg` as the only new file). This is additive — non-ArchiMate C4/Mermaid/Sequence/ER/Diagram behaviour is unchanged.
+
 Based on the user's request and available artifacts, select the appropriate diagram type:
 
 ### Mode A: C4 Context Diagram (Level 1)
@@ -766,7 +768,7 @@ Create the architecture diagram document using the template:
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, ask only what remains unknown (one question at a time, each skippable), and persist answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 **Read the template** (with user override support):
 

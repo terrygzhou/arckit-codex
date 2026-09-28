@@ -23,16 +23,26 @@ override it. Each question is **optional**: a skipped question renders as a
 - **Dependencies:** Which applications integrate with which, and through what patterns (API, batch, file)?
 - **Data flows:** Which applications produce or consume the key data assets?
 - **Pain points:** Where do application-level pain points, license risk, or security debt surface?
+- **Inventory scope:** What is the scope of this application inventory? Options: `All applications` | `Business Unit` | `Specific Project` (default: `All applications`).
 
 ## Document Control
 
 | Field | Value |
 |-------|-------|
 | Document ID | `ARC-[PROJECT_ID]-APP-v[VERSION]` |
+| Document Type | Application Inventory |
 | Project | `[PROJECT_NAME]` |
-| Owner | `[OWNER_NAME_AND_ROLE]` |
 | Classification | `[CLASSIFICATION]` |
 | Status | DRAFT |
+| Version | `[VERSION]` |
+| Created Date | `[YYYY-MM-DD]` |
+| Last Modified | `[YYYY-MM-DD]` |
+| Review Cycle | [REVIEW_CYCLE] |
+| Next Review Date | `[YYYY-MM-DD]` |
+| Owner | `[OWNER_NAME_AND_ROLE]` |
+| Reviewed By | `[REVIEWER_NAME]` |
+| Approved By | `[APPROVER_NAME]` |
+| Distribution | `[DISTRIBUTION_LIST]` |
 | Created | `[YYYY-MM-DD]` |
 | Review Date | `[YYYY-MM-DD]` |
 
@@ -68,13 +78,13 @@ override it. Each question is **optional**: a skipped question renders as a
 ```mermaid
 quadrantChart
     title Strategic Fit vs Technical Debt
-    x-axis__Low Debt --> High Debt
-    y-axis__Low Value --> High Value
+    x-axisLow Debt --> High Debt
+    y-axisLow Value --> High Value
     quadrant-1 Keep & Invest
     quadrant-2 Modernize
     quadrant-3 Retire
     quadrant-4 Monitor
-    %% Place applications here — format: [name, (x, y)]
+    %% Place applications here — format: "name": [x, y]
     "APP-001": [0.2, 0.9]
     "APP-002": [0.7, 0.8]
     "APP-003": [0.8, 0.2]
@@ -237,3 +247,37 @@ gantt
 **Generated on**: `[DATE] [TIME] GMT`
 **ArcKit Version**: `{ARCKIT_VERSION}`
 **Project**: `[PROJECT_NAME]` (Project `[PROJECT_ID]`)
+
+## PlantUML ArchiMate View
+
+**Layer focus**: Application
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> This view is additive; the Mermaid diagram(s) above are unchanged.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {diagram_title}
+
+LAYOUT_TOP_DOWN()
+
+' Elements
+{plantuml_elements}
+
+' Relationships (realization concrete->abstract; serving/flow/access)
+{plantuml_relationships}
+
+' Layout constraints (hidden placement edges)
+{plantuml_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.

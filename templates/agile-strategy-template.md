@@ -2,9 +2,9 @@
 
 > **Template:** Agile Strategy Canvas (O-AA Dual Transformation Planning)
 > **Issue:** ${user_config.project_issue_prefix}-126 | **Command:** `/arckit:agile-strategy`
-> **Schema:** `agile-strategy-canvas.yaml`
-> **Validation:** `validate-agile-strategy.py`
-> **O-AA Reference:** Learning Unit 2 — Agile Strategy
+> **Schema:** `schemas/strategy-canvas.json`
+> **Validation:** `python3 validate-architecture.py <canvas>.yaml --phase canvas`
+> **O-AA Reference:** Ch. 11 (Agile Strategy)
 
 ## Intake Interview Questions
 
@@ -426,12 +426,12 @@ transformation_waves:
 
 ## YAML Schema Reference
 
-The structured version of this canvas uses the `agile-strategy-canvas.yaml` schema. See schema definition in `Architecture/schemas/agile-strategy-canvas.yaml`.
+The structured version of this canvas is validated against the shipped schema `schemas/strategy-canvas.json` (shared OAA schemas live in `schemas/`; see `schemas/README.md`).
 
 Validate your canvas with:
 
 ```bash
-python validate-agile-strategy.py path/to/your-canvas.yaml
+python3 validate-architecture.py path/to/your-canvas.yaml --phase canvas
 
 ```text
 
@@ -457,3 +457,37 @@ python validate-agile-strategy.py path/to/your-canvas.yaml
 | `product-architecture-template.md` | Strategy Canvas defines the why; Product Architecture defines the what |
 | `agile-governance-cadence-template.md` | Strategy Canvas sets direction; Governance Cadence maintains it |
 | `adm-preliminary-template.md` | Use ADM-P for formal TOGAF engagements; Strategy Canvas for agile planning |
+
+## PlantUML ArchiMate View
+
+**Layer focus**: Strategy (capabilities / value stream)
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> This view is additive; the Mermaid diagram(s) above are unchanged.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {diagram_title}
+
+LAYOUT_TOP_DOWN()
+
+' Elements
+{plantuml_elements}
+
+' Relationships (realization concrete->abstract; serving/flow/access)
+{plantuml_relationships}
+
+' Layout constraints (hidden placement edges)
+{plantuml_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.

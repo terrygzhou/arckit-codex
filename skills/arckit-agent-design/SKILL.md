@@ -48,31 +48,9 @@ $ARGUMENTS
   5. Also create `projects/{NNN}-{slug}/external/README.md` with a note to place external reference documents here
   6. Set `PROJECT_ID` = the 3-digit number, `PROJECT_PATH` = the new directory path
 
-### 3. Interactive Configuration
+### 3. Load Mermaid Syntax References
 
-Before generating the agent design, ask the user for key parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
-
-**Gathering rules** (apply to all questions in this section):
-
-- Ask the most important question first; fill in secondary details from context or reasonable defaults.
-- **Maximum 2 rounds of questions.** After that, pick the best option from available context.
-- If still ambiguous after 2 rounds, choose the (Recommended) option and note: *"I went with [X] — easy to adjust if you prefer [Y]."*
-
-**Question 1** — header: `Pattern`, multiSelect: false
-> "What agent architecture pattern best describes this agent?"
-
-- **Single Agent (Recommended)**: Single LLM core with tools — best for focused tasks, simple domains
-- **Chain**: Sequential pipeline of specialized agents — best for multi-step reasoning, complex workflows
-- **Multi-Agent**: Parallel workers with a coordinator — best for complex domains, parallelization
-- **Hierarchical**: Supervisor + worker agents — best for coordinated multi-agent systems, dynamic task allocation
-
-**Question 2** — header: `Scope`, multiSelect: false
-> "What is the primary scope of this agent?"
-
-- **Task Automation**: Automating repetitive workflows (data processing, report generation, routine decisions)
-- **Knowledge Work**: Research, analysis, synthesis (document analysis, market research, decision support)
-- **Creative**: Generation and ideation (content creation, design, brainstorming)
-- **Decision Support**: Recommendation and evaluation (risk assessment, prioritization, planning)
+Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills/mermaid-syntax/references/c4.md` for official Mermaid syntax — flowchart node shapes, edge labels, and C4 component diagram syntax. Diagrams in this artefact MUST follow the reference syntax.
 
 ### 4. Load Mermaid Syntax References
 
@@ -83,6 +61,10 @@ Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills
 **Run the intake interview**:
 
 - Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+
+**Run the intake interview**:
+
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 **Read the template** (with user override support):
 
@@ -101,10 +83,10 @@ Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills
 - **Purpose**: One-sentence description of what the agent does
 - **Domain**: Domain of expertise (e.g., "financial analysis", "code review")
 
-**Architecture decisions** (from Questions or context):
+**Architecture decisions** (from intake: Architecture pattern / Agent scope, or context):
 
-- **Architecture pattern**: Single / Chain / Multi-Agent / Hierarchical (from Question 1)
-- **Scope**: Task Automation / Knowledge Work / Creative / Decision Support (from Question 2)
+- **Architecture pattern**: Single / Chain / Multi-Agent / Hierarchical (from intake: Architecture pattern)
+- **Scope**: Task Automation / Knowledge Work / Creative / Decision Support (from intake: Agent scope)
 - **LLM model**: Primary model (e.g., "Claude Sonnet 5 (session default)")
 - **Hosting**: Local / Cloud / Hybrid
 

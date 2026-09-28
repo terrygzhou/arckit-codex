@@ -50,7 +50,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 **Read the template** (with user override support):
 
@@ -60,16 +60,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `$arckit-customize application-inventory`
 
-### 3. Clarify Scope with User
-
-Before generating the inventory, ask the user about the scope of this assessment:
-
-**direct user question**: "What is the scope of this application inventory?"
-
-- Options: `All applications` | `Business Unit` | `Specific Project`
-- Default: `All applications`
-
-### 4. Gather Application Data
+### 3. Gather Application Data
 
 Collect application information from all available sources:
 
@@ -79,7 +70,7 @@ Collect application information from all available sources:
 - **From external documents**: Existing application catalogues, technology registers, portfolio assessments
 - **From user**: Direct input about known applications, strategic priorities, technology strategy
 
-### 5. Load Mermaid Syntax References
+### 4. Load Mermaid Syntax References
 
 Read the following Mermaid syntax references for diagrams:
 
@@ -87,7 +78,7 @@ Read the following Mermaid syntax references for diagrams:
 - `.arckit/skills/mermaid-syntax/references/pie.md` — Technology distribution (pie chart)
 - `.arckit/skills/mermaid-syntax/references/flowchart.md` — Dependency map (flowchart)
 
-### 6. Generate Application Inventory
+### 5. Generate Application Inventory
 
 Create the Application Inventory document following the template structure.
 
@@ -183,7 +174,7 @@ Identify application-level risks:
 - Link REQ → Application requirements
 - Link PRIN → Technology alignment
 
-### 7. UK Government Specifics
+### 6. UK Government Specifics
 
 If the user indicates this is a UK Government project, include:
 
@@ -193,7 +184,7 @@ If the user indicates this is a UK Government project, include:
 - **Spending Control Alignment**: Application costs mapped to SR periods
 - **Cross-Government Services**: Identify opportunities for GOV.UK Pay, Notify, Verify, Design System
 
-### 8. MOD Specifics
+### 7. MOD Specifics
 
 If this is a Ministry of Defence project, include:
 
@@ -202,7 +193,7 @@ If this is a Ministry of Defence project, include:
 - **IAMM Level**: Information assurance maturity for each application
 - **SSE**: Single Source Estate compliance for commercial tools
 
-### 9. Quality Gate
+### 8. Quality Gate
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **APP** per-type checks pass. Fix any failures before proceeding.
 
@@ -214,7 +205,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 4. **Capability Mapping**: Every application must be mapped to at least one business capability
 5. **Lifecycle Data**: Every application must have lifecycle phase and status documented
 
-### 10. Write the Output
+### 9. Write the Output
 
 **IMPORTANT**: The Application Inventory document will be a substantial document. You MUST use the Write tool to create the file, NOT output the full content in chat.
 
@@ -259,7 +250,7 @@ Before completing the document, populate document information fields:
 **AI Model**: [Actual model name]
 ```
 
-### 11. Show Summary to User
+### 10. Show Summary to User
 
 After writing the file, show a concise summary (NOT the full document):
 
@@ -350,6 +341,25 @@ After writing the file, show a concise summary (NOT the full document):
 7. **TOGAF Alignment**: This document maps to TOGAF Phase C (Technology Architecture) outputs: existing technology baseline, technology standards, and application portfolio assessment.
 
 8. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji.
+
+## PlantUML ArchiMate View (additive)
+
+When the artefact content is **ArchiMate-representable** (a layer/tier, capability, service, application or technology component, or a motivation element — driver/goal/constraint), add a PlantUML-ArchiMate view to the generated artefact:
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `## PlantUML ArchiMate View` block in the template, stereotyped into the **Application** layer focus.
+3. Quality gates: single-layer stereotyping; ≤ 12 elements per layer; realization edges point concrete → abstract; no unlabelled cross-layer edges.
+
+This is additive — the existing Mermaid diagram(s) are retained, not replaced.
+
+## Render the ArchiMate view(s) to self-contained SVG(s)
+
+PlantUML does not render in GitHub markdown, so each ArchiMate view above (the demanded base view, and any companion view) is delivered as a rendered **self-contained `.svg`** — the inline PlantUML source above stays the source of truth:
+
+1. Render offline with the pinned build: `java -jar plantuml-1.2026.8.jar -tsvg <view>.puml` (no public server, no URL-include path).
+2. The rendered `.svg` is the **only new rendered file** for the view; do not create a new architecture document file to host the view (the inline PlantUML source is retained).
+3. Verify self-containment before delivery: no `http(s)` URL other than the W3C `2000/svg` / `1999/xlink` namespace declarations, `xlink:href` limited to local `#anchors`, and the SVG opens and renders fully offline.
+4. Notation + rendering reference: § Diagram Production Policy + § Offline Self-Contained SVG Rendering in `skills/plantuml-syntax/references/archimate.md`.
 
 ## Suggested Next Steps
 

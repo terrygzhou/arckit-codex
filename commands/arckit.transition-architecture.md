@@ -52,7 +52,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 **Read the template** (with user override support):
 
@@ -62,28 +62,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `/arckit:customize transition-architecture`
 
-### 3. AskUserQuestion: Number of Transition Architectures
-
-Before generating the transition architecture, use the **AskUserQuestion** tool to determine the number of transition architectures (intermediate states between baseline and target):
-
-**AskUserQuestion**: "How many transition architectures (migration waves) should the plan cover?"
-
-- Options: `2 waves` | `3 waves (Recommended)` | `4 waves`
-- Default: `3 waves`
-
-**Wave profiles**:
-
-- **2 waves**: Simple transition — baseline → intermediate → target. Suitable for focused, short-duration programmes (≤12 months).
-- **3 waves (Recommended)**: Balanced transition — baseline → Architecture 2 → Architecture 3 → target. Most common for enterprise transformations (12–36 months).
-- **4 waves**: Granular transition — baseline → Architecture 2 → Architecture 3 → Architecture 4 → target. Suitable for complex, long-duration programmes (24–48 months) with many interdependencies.
-
-**Gathering rules** (apply to all questions):
-
-- Ask the most important question first; fill in secondary details from context or reasonable defaults.
-- **Maximum 2 rounds of questions.** After that, pick the best option from available context.
-- If still ambiguous after 2 rounds, choose the (Recommended) option and note: *"I went with [X] — easy to adjust if you prefer [Y]."*
-
-### 4. Gather Transition Context
+### 3. Gather Transition Context
 
 Read all available documents identified in the Prerequisites section. Build a mental model of:
 
@@ -94,11 +73,11 @@ Read all available documents identified in the Prerequisites section. Build a me
 - **Risk register** (from RISK if available): Existing risks that affect migration sequencing
 - **Stakeholder priorities** (from STKE if available): Which capability areas and timelines matter most
 
-### 5. Load Mermaid Syntax References
+### 4. Load Mermaid Syntax References
 
 Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills/mermaid-syntax/references/gantt.md` for official Mermaid syntax — node shapes, edge labels, gantt chart syntax, and styling options.
 
-### 6. Generate Transition Architecture
+### 5. Generate Transition Architecture
 
 Create a comprehensive Transition Architecture document following the template structure.
 
@@ -183,7 +162,7 @@ Create traceability links showing the complete chain:
 - **APPR decisions → Work packages**: Application migration decisions must be reflected in relevant WPs
 - **Traceability table**: Tabular cross-reference of source artifacts to TRANS sections
 
-### 7. UK Government Specifics
+### 6. UK Government Specifics
 
 If the user indicates this is a UK Government project, include:
 
@@ -195,7 +174,7 @@ If the user indicates this is a UK Government project, include:
 - **Cross-Government Services**: Reuse opportunities (GOV.UK Pay, Notify, Design System) — include in work package scope where applicable
 - **Digital Marketplace**: G-Cloud/DOS procurement alignment for vendor-sourced work packages
 
-### 8. MOD Specifics
+### 7. MOD Specifics
 
 If this is a Ministry of Defence project, include:
 
@@ -204,7 +183,7 @@ If this is a Ministry of Defence project, include:
 - **IAMM**: Security maturity milestones per transition wave
 - **JSP 936**: AI assurance requirements for AI/ML migration work packages (if applicable)
 
-### 9. Quality Gate
+### 8. Quality Gate
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **TRANS** per-type checks pass. Fix any failures before proceeding.
 
@@ -218,7 +197,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 - **Risk register** has at least 3 entries with contingency plans
 - Every GAPA workstream is addressed by at least one work package
 
-### 10. Write the Transition Architecture File
+### 9. Write the Transition Architecture File
 
 **IMPORTANT**: The transition architecture document will be a substantial document (typically 350-600 lines). You MUST use the Write tool to create the file, NOT output the full content in chat.
 
@@ -230,7 +209,7 @@ projects/{P}/ARC-{P}-TRANS-v1.0.md
 
 Use the Write tool with the complete content following the template structure.
 
-### 11. Show Summary to User
+### 10. Show Summary to User
 
 After writing the file, show a concise summary (NOT the full document):
 
@@ -322,6 +301,35 @@ After writing the file, show a concise summary (NOT the full document):
 8. **Version Management**: If a transition architecture already exists (`ARC-*-TRANS-v*.md`), create a new version (v2.0) rather than overwriting.
 
 9. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji
+
+## PlantUML ArchiMate View (additive)
+
+When the artefact content is **ArchiMate-representable** (a layer/tier, capability, service, application or technology component, or a motivation element — driver/goal/constraint), add a PlantUML-ArchiMate view to the generated artefact:
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `## PlantUML ArchiMate View` block in the template, stereotyped into the **Capability (incremental target)** layer focus.
+3. Quality gates: single-layer stereotyping; ≤ 12 elements per layer; realization edges point concrete → abstract; no unlabelled cross-layer edges.
+
+This is additive — the existing Mermaid diagram(s) are retained, not replaced.
+
+## PlantUML ArchiMate Companion View (Implementation & Migration, additive)
+
+When the artefact content supports a **Implementation & Migration** companion view, add a **separate** PlantUML-ArchiMate companion view to the generated artefact (a separate sequenced `ARCH` document, not merged into the base view above):
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `### PlantUML ArchiMate Companion View (Implementation & Migration)` block in the `transition-architecture` template (`{companion_impl_migration_elements}`, `{companion_impl_migration_relationships}`, `{companion_impl_migration_layout}`).
+3. Quality gates: separate `ARCH` document; ≤ 12 elements per layer; realization edges point concrete → abstract; split-never-drop (reduce to the most material elements or split into another `ARCH` doc, never silently drop).
+
+This is additive — the demanded base view and existing Mermaid diagram(s) are retained, not replaced.
+
+## Render the ArchiMate view(s) to self-contained SVG(s)
+
+PlantUML does not render in GitHub markdown, so each ArchiMate view above (the demanded base view, and any companion view) is delivered as a rendered **self-contained `.svg`** — the inline PlantUML source above stays the source of truth:
+
+1. Render offline with the pinned build: `java -jar plantuml-1.2026.8.jar -tsvg <view>.puml` (no public server, no URL-include path).
+2. The rendered `.svg` is the **only new rendered file** for the view; do not create a new architecture document file to host the view (the inline PlantUML source is retained).
+3. Verify self-containment before delivery: no `http(s)` URL other than the W3C `2000/svg` / `1999/xlink` namespace declarations, `xlink:href` limited to local `#anchors`, and the SVG opens and renders fully offline.
+4. Notation + rendering reference: § Diagram Production Policy + § Offline Self-Contained SVG Rendering in `skills/plantuml-syntax/references/archimate.md`.
 
 ## Suggested Next Steps
 

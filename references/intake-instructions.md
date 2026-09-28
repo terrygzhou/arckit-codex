@@ -6,10 +6,13 @@ before it renders its artefact. The template is the single source of truth for
 and bundled overlay (`togaf/adm`, `oaa`, `agent/architecture`) — interviews
 against the *effective* template rather than a hard-coded question list.
 
-The interview is a **soft gate**. It collects input; it never blocks a command,
-never adds diagram or output demands the template does not already ask for. It
-puts every derived input to the user — prefilled where available to confirm or
-override — one question at a time, each question optional and skippable.
+The interview is a **soft gate** that is **ask-always, answer-optional**: it
+MUST run, and it MUST put every derived input to the user — prefilled where
+available to confirm or override — one question at a time (the *asking* is
+mandatory). It never blocks a command and never adds diagram or output demands
+the template does not already ask for. Each question's *answer* is optional: the
+user confirms a prefilled value, overrides it, or skips it — a skipped question
+renders as a `TBD` marker.
 
 ## When to run
 
@@ -45,6 +48,23 @@ Walk the effective template and collect every input the artefact needs:
   An artefact that does not yet exist is a *hard dependency*, **not** an
   interview input: the command stops and prompts the user to generate that
   upstream artefact first, and never renders the missing artefact as `TBD`.
+- **Authoritative question lists** — if the effective template carries an
+  `## Intake Interview Questions` section, every question in that block is
+  authoritative and MUST be put to the user (prefilled where available,
+  skippable), in addition to the inputs derived above. For `oaa` overlay
+  commands, the discovery-dimension checklist (`intake-discovery-dimensions.md`,
+  D1–D10) is the canonical coverage floor and its dimensions are likewise
+  asked-always.
+
+- **Decision inputs (scope / weighting / parameters)** — inputs that shape
+  *how* the artefact is generated rather than *what* it contains (engagement
+  scope, severity weighting, migration-wave count, pattern / priority /
+  re-entry parameters) are interview inputs, not a hard gate. When the
+  effective template declares them in its authoritative question list, the
+  command asks them *in the interview* — skippable like any other input
+  (§4–§6) — and must not add a standalone out-of-band question step of its
+  own: a dedicated `AskUserQuestion` step that the user must answer before
+  the command proceeds reintroduces the hard gate this interview replaces.
 
 Group related items so that one question can collect a coherent set (e.g. all
 Document Control metadata) rather than one question per leaf.
@@ -83,6 +103,13 @@ overrides it):
 A higher-precedence source supplies the value shown; it does not remove the
 question — the prefilled value is still put to the user to confirm or override.
 
+A saved intake file from a previous run of this command is a prefill source (#2 above), not a record that the interview already happened: on a re-run every question is still put to the user, prefilled from that file for confirmation or override.
+
+**No batch confirmation.** Never collapse the interview into a single "confirm all
+prefilled answers" question, even when every input is fully prefilled from saved
+intake, artefacts, or user config: each question is put to the user as its own
+turn. If the client offers no structured question tool, ask each question in plain text, one at a time — the interview is conducted question by question, never skipped, and never replaced by a "proceed without asking" decision.
+
 ## 5. Persist answers
 
 Persist the collected answers for this command to
@@ -95,6 +122,29 @@ missing; merge without clobbering answers the user already set):
   "updated": "<ISO-8601 timestamp>"
 }
 ```
+
+`answers` and `updated` are the required keys. **Provenance / audit keys** may
+be added beside them to record where every value the artefact carries came
+from. All are optional, hand-editable, and never rendered into the artefact:
+
+- `prefill_provenance` — object mapping each prefilled or otherwise sourced
+  field/input to its source in §3 precedence order, e.g.
+  `"Document ID": "derived: project 001 + command ADMP + new"` or
+  `"Classification": "prefilled from user_config.default_classification"`.
+- `mandatory_inputs` — the MANDATORY prerequisite-tier *values* the user must
+  supply; `[]` when there are none.
+- `mandatory_artefact_dependencies` — upstream artefacts the MANDATORY tier
+  names (hard dependencies; never rendered as `TBD`).
+- `recommended_missing` — RECOMMENDED inputs absent at generation time
+  (noted, non-blocking).
+- `unresolved_if_all_skipped` — the `TBD` markers that would render if every
+  skippable input were skipped, each with the quoted question that produced it.
+
+**Audit rule:** every value the artefact carries must trace to an `answers`
+entry or a `prefill_provenance` entry. A section or field generated with
+neither is a conformance gap: record the missing provenance — and the missing
+answer for any authoritative question that was asked but not persisted —
+instead of leaving the content untraced.
 
 - `{command-stem}` is the command's slug (e.g. `stakeholders`, `data-architecture`).
 - The file is hand-editable JSON. Editing it changes the artefact on the next

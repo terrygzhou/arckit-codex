@@ -88,9 +88,9 @@ Use this template when **any** of the following conditions are met:
 
 ### O-AA Axiom Alignment
 
-- **Axiom 1:** "The purpose of architecture is to improve the organisation." — every decision traces to business outcome
+- **Axiom 1 (Customer Experience Focus)** — every decision traces to business outcome
 
-- **Axiom 4:** "Architecture must be fit for purpose." — no gold-plating; scope constrained to client's immediate delivery horizon
+- **Axiom 4 (Touchpoint Orchestration)** — no gold-plating; scope constrained to client's immediate delivery horizon
 
 ### Activities
 
@@ -172,9 +172,9 @@ vision:
 
 ### O-AA Axiom Alignment
 
-- **Axiom 6:** "Architecture is about outcomes, not outputs." — capabilities measured by business value delivered, not diagram count
+- **Axiom 6 (Autonomous Cross-Functional Teams)** — capabilities measured by business value delivered, not diagram count
 
-- **Axiom 8:** "Every stakeholder has an architecture concern." — data classification and compliance controls trace to specific stakeholder concerns from Sprint 0
+- **Axiom 8 (Loosely-Coupled Systems)** — data classification and compliance controls trace to specific stakeholder concerns from Sprint 0
 
 ### Activities
 
@@ -188,11 +188,11 @@ vision:
 
 | Artifact | Schema | Validation |
 |---|---|---|
-| `business-architecture.yaml` | `schemas/business-architecture.json` | `python validate-architecture.py business-architecture.yaml --phase business` |
-| `data-architecture.yaml` | `schemas/data-architecture.json` | `python validate-architecture.py data-architecture.yaml --phase data` |
+| `business-architecture.yaml` | structured per template section Sprint 1 | Manual review; cross-reference with vision.yaml scope |
+| `data-architecture.yaml` | structured per template section Sprint 1 | Manual review; cross-reference with vision.yaml scope |
 | `capability-gap-analysis.md` | N/A (markdown) | Cross-reference with vision.yaml success criteria |
 
-### Data Architecture Structure (from `schemas/data-architecture.json`)
+### Data Architecture Structure (from the Sprint 1 template section)
 
 ```yaml
 data_assets:
@@ -247,9 +247,9 @@ applications:
 
 ### O-AA Axiom Alignment
 
-- **Axiom 3:** "The organization's architecture must fit its strategy." — technology choices directly enable the AI workload type declared in Sprint 0
+- **Axiom 3 (Rapid Feedback Loops)** — technology choices directly enable the AI workload type declared in Sprint 0
 
-- **Axiom 10:** "Architecture is not just IT." — operational model (who monitors, who responds) defined alongside technical stack
+- **Axiom 10 (Simple Common Operating Principles)** — operational model (who monitors, who responds) defined alongside technical stack
 
 ### Activities
 
@@ -263,11 +263,11 @@ applications:
 
 | Artifact | Schema | Validation |
 |---|---|---|
-| `technology-architecture.yaml` | `schemas/technology-architecture.json` | `python validate-architecture.py technology-architecture.yaml --phase technology` |
+| `technology-architecture.yaml` | structured per template section Sprint 2 | Manual review; cross-reference with vision.yaml constraints |
 | `data-flow-diagram.mmd` | Mermaid.js | Visual review |
 | `tech-stack-compliance.md` | N/A (markdown) | Cross-reference with vision.yaml regulatory controls |
 
-### Technology Architecture Structure (from `schemas/technology-architecture.json`)
+### Technology Architecture Structure (from the Sprint 2 template section)
 
 ```yaml
 technology_standards:
@@ -325,9 +325,9 @@ infrastructure:
 
 ### O-AA Axiom Alignment
 
-- **Axiom 2:** "Architecture is about enabling change, not preventing it." — implementation plan enables rapid delivery with governance built in
+- **Axiom 2 (Outside-In Thinking)** — implementation plan enables rapid delivery with governance built in
 
-- **Axiom 5:** "The right architecture is the one that gets built." — pragmatic trade-offs over theoretical perfection
+- **Axiom 5 (Value Stream Alignment)** — pragmatic trade-offs over theoretical perfection
 
 ### Activities
 
@@ -410,9 +410,9 @@ migration:
 
 ### O-AA Axiom Alignment
 
-- **Axiom 7:** "Architecture governance is not about control, it's about enablement." — governance accelerates delivery by providing guardrails, not bureaucracy
+- **Axiom 7 (Authority, Responsibility, and Accountability Distribution)** — governance accelerates delivery by providing guardrails, not bureaucracy
 
-- **Axiom 9:** "Architecture is a living, breathing entity." — continuous monitoring and adaptation, not a one-time document
+- **Axiom 9 (Modular Data Platform)** — continuous monitoring and adaptation, not a one-time document
 
 ### Activities
 
@@ -426,8 +426,8 @@ migration:
 
 | Artifact | Schema | Validation |
 |---|---|---|
-| `governance-report.yaml` | N/A (custom schema) | `python validate-architecture.py governance-report.yaml --phase governance` |
-| `change-request.yaml` | N/A (custom schema) | Automated impact analysis script |
+| `governance-report.yaml` | N/A (structure per template section Sprint 4+) | Manual review; cross-reference with governance-cadence.yaml |
+| `change-request.yaml` | `schemas/change-request.yaml` | `python3 validate-architecture.py change-request.yaml --phase change` |
 | `performance-baseline.csv` | N/A (CSV) | Automated collection from monitoring stack |
 | `architecture-health.md` | N/A (markdown) | Quarterly manual review |
 
@@ -484,10 +484,10 @@ compliance_artifacts:
 | Sprint | Phase | Primary Schema | Secondary Schema |
 |---|---|---|---|
 | 0 | ADM-P + A | `schemas/vision.json` | — |
-| 1 | ADM-B + C (data) | `schemas/business-architecture.json` | `schemas/data-architecture.json` |
-| 2 | ADM-C (tech) + D | `schemas/technology-architecture.json` | `schemas/compliance-mapping.json` |
+| 1 | ADM-B + C (data) | N/A (template-structured) | N/A (template-structured) |
+| 2 | ADM-C (tech) + D | N/A (template-structured) | N/A (template-structured) |
 | 3 | ADM-E + F | `schemas/implementation-strategy.json` | — |
-| 4+ | ADM-G + H | `schemas/compliance-mapping.json` | — |
+| 4+ | ADM-G + H | `schemas/governance-cadence.json` | `schemas/change-request.yaml` |
 
 ---
 
@@ -532,8 +532,75 @@ Example: [Sprint 3] ADM-E: WAVE-001 Foundation Infrastructure
 
 - ${user_config.references_dir} — organisation reference documents (ADR-001: Executable TOGAF ADM Workflow, ADR-002: Architecture Handoff Process, ADR-003: AI Governance Framework, O-AA Study Notes); include only documents that exist in the configured directory
 
-- Schema definitions: `schemas/vision.json`, `schemas/implementation-strategy.json`, `schemas/business-architecture.json`, `schemas/data-architecture.json`, `schemas/technology-architecture.json`
+- Shared schemas: the 9 shared architecture schemas ship with this plugin in `schemas/` (vision, implementation-strategy, product-architecture, strategy-canvas, security-backlog, compliance-evidence, governance-cadence, threat-model, change-request); validate artifacts with `python3 validate-architecture.py` (see `schemas/README.md`)
 
 - The Open Group: Open Agile Architecture (O-AA) Standard
 
 - The Agile Enterprise Architect Playbook (G226) — TOGAF + Agile integration
+
+## PlantUML ArchiMate View
+
+**Layer focus**: Technology + Application
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> This view is additive; the Mermaid diagram(s) above are unchanged.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {diagram_title}
+
+LAYOUT_TOP_DOWN()
+
+' Elements
+{plantuml_elements}
+
+' Relationships (realization concrete->abstract; serving/flow/access)
+{plantuml_relationships}
+
+' Layout constraints (hidden placement edges)
+{plantuml_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.
+
+### PlantUML ArchiMate Companion View (Physical)
+
+**Layer focus**: Physical
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> Companion view: a separate sequenced `ARCH` document — additive to the base view above, never merged into it.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {oaa_adm_lite_physical_title}
+
+LAYOUT_TOP_DOWN()
+
+' Companion layer elements
+{companion_physical_elements}
+
+' Realization/relationship edges (concrete->abstract)
+{companion_physical_relationships}
+
+{companion_physical_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.

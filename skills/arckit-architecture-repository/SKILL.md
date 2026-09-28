@@ -67,7 +67,7 @@ This command operates at **global scope** by default. The repository synthesises
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 **Read the template** (with user override support):
 
@@ -476,6 +476,25 @@ After writing the file, show a concise summary (NOT the full document):
 9. **Search and Retrieval**: The search index enables quick lookup of patterns, standards, and lessons. Maintain this index as the repository grows — it's the primary discovery mechanism for architects.
 
 10. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji.
+
+## PlantUML ArchiMate View (additive)
+
+When the artefact content is **ArchiMate-representable** (a layer/tier, capability, service, application or technology component, or a motivation element — driver/goal/constraint), add a PlantUML-ArchiMate view to the generated artefact:
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `## PlantUML ArchiMate View` block in the template, stereotyped into the **Structure (catalog objects)** layer focus.
+3. Quality gates: single-layer stereotyping; ≤ 12 elements per layer; realization edges point concrete → abstract; no unlabelled cross-layer edges.
+
+This is additive — the existing Mermaid diagram(s) are retained, not replaced.
+
+## Render the ArchiMate view(s) to self-contained SVG(s)
+
+PlantUML does not render in GitHub markdown, so each ArchiMate view above (the demanded base view, and any companion view) is delivered as a rendered **self-contained `.svg`** — the inline PlantUML source above stays the source of truth:
+
+1. Render offline with the pinned build: `java -jar plantuml-1.2026.8.jar -tsvg <view>.puml` (no public server, no URL-include path).
+2. The rendered `.svg` is the **only new rendered file** for the view; do not create a new architecture document file to host the view (the inline PlantUML source is retained).
+3. Verify self-containment before delivery: no `http(s)` URL other than the W3C `2000/svg` / `1999/xlink` namespace declarations, `xlink:href` limited to local `#anchors`, and the SVG opens and renders fully offline.
+4. Notation + rendering reference: § Diagram Production Policy + § Offline Self-Contained SVG Rendering in `skills/plantuml-syntax/references/archimate.md`.
 
 ## Suggested Next Steps
 

@@ -23,6 +23,24 @@ override it. Each question is **optional**: a skipped question renders as a
 - **Risk:** What is the risk of change, and what is the risk of doing nothing?
 - **Approver:** Who is accountable for approving this change?
 - **Reversibility:** Is the change reversible, and what is the rollback plan?
+- **Change type:** What type of architecture change is this? Options: `Evolutionary` | `Transformational` | `Corrective` (default: `Evolutionary`):
+  - **Evolutionary**: Incremental improvement to existing architecture — extends or enhances current capabilities without fundamental change
+  - **Transformational**: Fundamental change that restructures significant portions of the architecture — new capabilities, technology platforms, or operating models
+  - **Corrective**: Fix for architectural deficiencies, technical debt, or compliance failures — restores intended design
+- **Priority:** What is the priority level of this change? Options: `Critical` | `High` | `Medium` | `Low` (default: `Medium`):
+  - **Critical**: Must be implemented immediately — safety, security, or regulatory compliance
+  - **High**: Major business impact — core capability changes, significant investment
+  - **Medium**: Standard change — enhancement or improvement within planned cycles
+  - **Low**: Minor refinement — low-risk, low-cost improvements
+- **ADM Re-Entry:** Which ADM phases need to be re-entered for this change? (multi-select; skip if none)
+  - **Phase A (Architecture Vision)**: Change affects overall vision or scope
+  - **Phase B (Business Architecture)**: Change affects business processes or organisation
+  - **Phase C (Information Systems)**: Change affects data or application architecture
+  - **Phase D (Technology Architecture)**: Change affects technology infrastructure
+  - **Phase E (Opportunities & Solutions)**: Change affects solution options or migrations
+  - **Phase F (Migration Planning)**: Change affects migration sequencing
+  - **Phase G (Implementation Governance)**: Change affects implementation oversight
+  - **Phase H (Change Management)**: Change affects ongoing change control
 
 ## Document Control
 
@@ -34,11 +52,13 @@ override it. Each question is **optional**: a skipped question renders as a
 | **Change ID** | `ACHG-[ACHG_NUM]` |
 | **Classification** | `[CLASSIFICATION]` |
 | **Status** | DRAFT |
+| **Version** | `[VERSION]` |
 | **Change Type** | `[EVOLUTIONARY / TRANSFORMATIONAL / CORRECTIVE]` |
 | **Priority** | `[CRITICAL / HIGH / MEDIUM / LOW]` |
 | **Created Date** | `[YYYY-MM-DD]` |
 | **Last Modified** | `[YYYY-MM-DD]` |
-| **Review Date** | `[YYYY-MM-DD]` |
+| **Review Cycle** | `[REVIEW_CYCLE]` |
+| **Next Review Date** | `[YYYY-MM-DD]` |
 | **Owner** | `[OWNER_NAME_AND_ROLE]` |
 | **Reviewed By** | `[REVIEWER_NAME]` |
 | **Approved By** | `[APPROVER_NAME]` |
@@ -221,3 +241,37 @@ override it. Each question is **optional**: a skipped question renders as a
 **Project**: `[PROJECT_NAME]` (Project `[PROJECT_ID]`)
 **AI Model**: `[MODEL_NAME]`
 **Generation Context**: [Brief note about source documents used]
+
+## PlantUML ArchiMate View
+
+**Layer focus**: Implementation (change increments)
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> This view is additive; the Mermaid diagram(s) above are unchanged.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {diagram_title}
+
+LAYOUT_TOP_DOWN()
+
+' Elements
+{plantuml_elements}
+
+' Relationships (realization concrete->abstract; serving/flow/access)
+{plantuml_relationships}
+
+' Layout constraints (hidden placement edges)
+{plantuml_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.

@@ -62,6 +62,7 @@ export const DOC_TYPES = {
   'ROAD':      { name: 'Roadmap',                          category: 'Planning' },
   'STRAT':     { name: 'Architecture Strategy',            category: 'Planning' },
   'BKLG':      { name: 'Product Backlog',                  category: 'Planning' },
+  'BMM':       { name: 'Business Motivation Model',        category: 'Planning' },
   // Architecture
   'PRIN':      { name: 'Architecture Principles',          category: 'Architecture' },
   'HLDR':      { name: 'High-Level Design Review',         category: 'Architecture' },
@@ -74,6 +75,7 @@ export const DOC_TYPES = {
   'WVCH':      { name: 'Wardley Value Chain',            category: 'Architecture' },
   'DIAG':      { name: 'Architecture Diagrams',            category: 'Architecture' },
   'DFD':       { name: 'Data Flow Diagram',                category: 'Architecture' },
+  'ARCH':      { name: 'ArchiMate View',                 category: 'Architecture' },
   'ADR':       { name: 'Architecture Decision Records',    category: 'Architecture' },
   'PLAT':      { name: 'Platform Design',                  category: 'Architecture' },
   // TOGAF ADM overlay (community)
@@ -287,7 +289,7 @@ export const HIGH_SEVERITY_TYPES = Object.values(HIGH_SEVERITY_BY_REGIME).flat()
 
 // Multi-instance types that require sequence numbers (e.g. ADR-001, RSCH-002)
 export const MULTI_INSTANCE_TYPES = new Set([
-  'ADR', 'DIAG', 'DFD', 'WARD', 'DMC',
+  'ADR', 'DIAG', 'DFD', 'WARD', 'DMC', 'ARCH',
   'RSCH', 'AWRS', 'AZRS', 'GCRS', 'DSCT', 'TNDR', 'CMPT',
   'WGAM', 'WCLM', 'WVCH',
   'GOVR', 'GCSR', 'GLND', 'GRNT',
@@ -301,6 +303,7 @@ export const SUBDIR_MAP = {
   'ADR':  'decisions',
   'DIAG': 'diagrams',
   'DFD':  'diagrams',
+  'ARCH': 'diagrams',
   'WARD': 'wardley-maps',
   'WDOC': 'wardley-maps',
   'WGAM': 'wardley-maps',

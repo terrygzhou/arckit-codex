@@ -52,7 +52,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 **Read the template** (with user override support):
 
@@ -62,22 +62,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `/arckit:customize gap-analysis`
 
-### 3. AskUserQuestion: Gap Severity Weighting
-
-Before generating the analysis, ask the user how to weight gap severity scoring:
-
-**AskUserQuestion**: "How should gap severity be weighted?"
-
-- Options: `Balanced` | `Strategic-risk` | `Operational`
-- Default: `Balanced`
-
-**Weighting profiles**:
-
-- **Balanced**: Equal weight to strategic impact and operational cost of the gap
-- **Strategic-risk**: Heavier weighting on strategic impact — gaps that threaten business outcomes are prioritised regardless of effort
-- **Operational**: Heavier weighting on effort/cost — gaps that can be closed quickly with high business value are prioritised
-
-### 4. Gather Gap Analysis Context
+### 3. Gather Gap Analysis Context
 
 Read all available documents identified in the Prerequisites section. Build a mental model of:
 
@@ -87,11 +72,11 @@ Read all available documents identified in the Prerequisites section. Build a me
 - **Risks** (from RISK if available): Existing risk exposure from capability gaps
 - **Stakeholder priorities** (from STKE if available): Which capability areas matter most
 
-### 5. Load Mermaid Syntax References
+### 4. Load Mermaid Syntax References
 
 Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills/mermaid-syntax/references/quadrantChart.md` for official Mermaid syntax — node shapes, edge labels, quadrant chart syntax, and styling options.
 
-### 6. Generate Gap Analysis
+### 5. Generate Gap Analysis
 
 Create a comprehensive Gap Analysis document following the template structure.
 
@@ -162,7 +147,7 @@ Map each gap to associated risks:
 - Link gaps to principles (from PRIN) if principle compliance is affected
 - Cross-reference to stakeholder drivers (from STKE)
 
-### 7. UK Government Specifics
+### 6. UK Government Specifics
 
 If the user indicates this is a UK Government project, include:
 
@@ -174,7 +159,7 @@ If the user indicates this is a UK Government project, include:
 - **Cross-Government Services**: Identify reuse opportunities (GOV.UK Pay, Notify, Design System)
 - **G-Cloud/DOS**: Procurement alignment for procurement-related gaps
 
-### 8. MOD Specifics
+### 7. MOD Specifics
 
 If this is a Ministry of Defence project, include:
 
@@ -183,7 +168,7 @@ If this is a Ministry of Defence project, include:
 - **IAMM**: Security maturity progression for security gaps
 - **JSP 936**: AI assurance requirements for AI/ML capability gaps (if applicable)
 
-### 9. Quality Gate
+### 8. Quality Gate
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **GAPA** per-type checks pass. Fix any failures before proceeding.
 
@@ -195,7 +180,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 - Workstream mapping contains at least 2 workstreams
 - Workstream dependency diagram is present
 
-### 10. Write the Gap Analysis File
+### 9. Write the Gap Analysis File
 
 **IMPORTANT**: The gap analysis document will be a substantial document (typically 250-400 lines). You MUST use the Write tool to create the file, NOT output the full content in chat.
 
@@ -207,7 +192,7 @@ projects/{P}/ARC-{P}-GAPA-v1.0.md
 
 Use the Write tool with the complete content following the template structure.
 
-### 11. Show Summary to User
+### 10. Show Summary to User
 
 After writing the file, show a concise summary (NOT the full document):
 
@@ -289,6 +274,35 @@ After writing the file, show a concise summary (NOT the full document):
    - **Low Priority**: Maintain in backlog, remove if no longer relevant
 
 10. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji
+
+## PlantUML ArchiMate View (additive)
+
+When the artefact content is **ArchiMate-representable** (a layer/tier, capability, service, application or technology component, or a motivation element — driver/goal/constraint), add a PlantUML-ArchiMate view to the generated artefact:
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `## PlantUML ArchiMate View` block in the template, stereotyped into the **Capability (target vs current)** layer focus.
+3. Quality gates: single-layer stereotyping; ≤ 12 elements per layer; realization edges point concrete → abstract; no unlabelled cross-layer edges.
+
+This is additive — the existing Mermaid diagram(s) are retained, not replaced.
+
+## PlantUML ArchiMate Companion View (Implementation & Migration, additive)
+
+When the artefact content supports a **Implementation & Migration** companion view, add a **separate** PlantUML-ArchiMate companion view to the generated artefact (a separate sequenced `ARCH` document, not merged into the base view above):
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `### PlantUML ArchiMate Companion View (Implementation & Migration)` block in the `gap-analysis` template (`{companion_impl_migration_elements}`, `{companion_impl_migration_relationships}`, `{companion_impl_migration_layout}`).
+3. Quality gates: separate `ARCH` document; ≤ 12 elements per layer; realization edges point concrete → abstract; split-never-drop (reduce to the most material elements or split into another `ARCH` doc, never silently drop).
+
+This is additive — the demanded base view and existing Mermaid diagram(s) are retained, not replaced.
+
+## Render the ArchiMate view(s) to self-contained SVG(s)
+
+PlantUML does not render in GitHub markdown, so each ArchiMate view above (the demanded base view, and any companion view) is delivered as a rendered **self-contained `.svg`** — the inline PlantUML source above stays the source of truth:
+
+1. Render offline with the pinned build: `java -jar plantuml-1.2026.8.jar -tsvg <view>.puml` (no public server, no URL-include path).
+2. The rendered `.svg` is the **only new rendered file** for the view; do not create a new architecture document file to host the view (the inline PlantUML source is retained).
+3. Verify self-containment before delivery: no `http(s)` URL other than the W3C `2000/svg` / `1999/xlink` namespace declarations, `xlink:href` limited to local `#anchors`, and the SVG opens and renders fully offline.
+4. Notation + rendering reference: § Diagram Production Policy + § Offline Self-Contained SVG Rendering in `skills/plantuml-syntax/references/archimate.md`.
 
 ## Suggested Next Steps
 

@@ -53,7 +53,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 **Read the template** (with user override support):
 
@@ -63,14 +63,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `/arckit:customize capability-map`
 
-### 3. Clarify Capability Depth with User
-
-**AskUserQuestion**: "What level of capability detail do you need?"
-
-- Options: `Level 1` (Domains only) | `Level 2` (Domains + Sub-capabilities) | `Level 3` (Full hierarchy)
-- Default: `Level 3`
-
-### 4. Generate Business Capability Map
+### 3. Generate Business Capability Map
 
 Create a comprehensive Business Capability Map following the template structure. The document should:
 
@@ -131,7 +124,7 @@ Create a comprehensive Business Capability Map following the template structure.
 - Link ADMP → BPCM → REQ → PRIN with document IDs.
 - Include all available source artifacts (ADMP mandatory, REQ/STKE/PRIN optional).
 
-### 5. UK Government Specifics
+### 4. UK Government Specifics
 
 If the user indicates this is a UK Government project, include:
 
@@ -143,7 +136,7 @@ If the user indicates this is a UK Government project, include:
 - **Cross-Government Services**: GOV.UK Pay, Notify, Design System
 - **G-Cloud/DOS**: Procurement alignment
 
-### 6. MOD Specifics
+### 5. MOD Specifics
 
 If this is a Ministry of Defence project, include:
 
@@ -152,11 +145,11 @@ If this is a Ministry of Defence project, include:
 - **IAMM**: Security maturity progression
 - **JSP 936**: AI assurance (if applicable)
 
-### 7. Load Mermaid Syntax References
+### 6. Load Mermaid Syntax References
 
 Read `.arckit/skills/mermaid-syntax/references/mindmap.md` and `.arckit/skills/mermaid-syntax/references/flowchart.md` for official Mermaid syntax — mindmap node syntax, flowchart node shapes, edge labels, and styling options. Also read `.arckit/skills/mermaid-syntax/references/quadrantChart.md` for quadrant chart syntax.
 
-### 8. Mermaid Diagram Requirements
+### 7. Mermaid Diagram Requirements
 
 Include the following Mermaid diagrams:
 
@@ -170,7 +163,7 @@ Include the following Mermaid diagrams:
 - ✅ Flowchart: Node labels can use `<br/>`, edge labels cannot
 - ✅ Quadrant chart: Coordinate values between 0.0 and 1.0
 
-### 9. Quality Gate
+### 8. Quality Gate
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **BPCM** per-type checks pass. Fix any failures before proceeding.
 
@@ -184,7 +177,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 - Traceability matrix links BPCM to ADMP, REQ, STKE, and PRIN
 - Capability IDs follow `C{N}.{M}.{K}` convention consistently throughout the document
 
-### 10. Write the Capability Map File
+### 9. Write the Capability Map File
 
 **IMPORTANT**: The capability map document will be a substantial document (typically 250-450 lines). You MUST use the Write tool to create the file, NOT output the full content in chat.
 
@@ -196,7 +189,7 @@ projects/{P}/ARC-{P}-BPCM-v1.0.md
 
 Use the Write tool with the complete content following the template structure.
 
-### 11. Show Summary to User
+### 10. Show Summary to User
 
 After writing the file, show a concise summary (NOT the full document):
 
@@ -281,6 +274,70 @@ After writing the file, show a concise summary (NOT the full document):
 8. **TOGAF Alignment**: This document maps to TOGAF ADM Phase A outputs: Business Architecture description, business capability definition, and value stream analysis.
 
 9. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji
+
+## PlantUML ArchiMate View (additive)
+
+When the artefact content is **ArchiMate-representable** (a layer/tier, capability, service, application or technology component, or a motivation element — driver/goal/constraint), add a PlantUML-ArchiMate view to the generated artefact:
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `## PlantUML ArchiMate View` block in the template, stereotyped into the **Business / Capability** layer focus.
+3. Quality gates: single-layer stereotyping; ≤ 12 elements per layer; realization edges point concrete → abstract; no unlabelled cross-layer edges.
+
+This is additive — the existing Mermaid diagram(s) are retained, not replaced.
+
+### BPCM capability map (ArchiMate hierarchical view)
+
+In addition to the realization view above, render the capability *hierarchy* as a
+dedicated PlantUML-ArchiMate Strategy-layer view in the `## Capability Map
+(ArchiMate View)` template block.
+
+**Build every diagram top-down.** L1 domains sit at the top and lower levels
+below (`LAYOUT_TOP_DOWN()`); a parent always reads above its children — never
+invert the hierarchy. Model each Level 1 domain and Level 2 sub-capability — and
+Level 3 detailed capabilities, **optional** (include them only when the artefact
+defines a Level 3 table; leave the Level-3 placeholder empty otherwise, no
+error) — as a `Strategy_Capability` element, joined whole→part by
+`Rel_Composition(parent, child, "contains")` (use `Rel_Aggregation` only where a
+sub-capability clearly retains standalone existence). Composition edges are NOT
+realization edges, so the concrete→abstract realization rule does not apply to
+them.
+
+**Complexity-adaptive rendering (top-down, by refinement level).** Pick the
+diagram set from the model's complexity — total elements `E` across all present
+levels (L1 + L2 [+ L3]) and the widest single level:
+
+- **Simple model → flatten to one diagram.** When `E ≤ 12`, emit a **single**
+  top-down diagram flattening every present level into one ArchiMate view.
+- **Complex model → abstract level-by-level, one diagram per refinement.** When
+  `E > 12` (or any single level is denser than ~12 elements), do NOT cram it into
+  one box:
+  1. emit an **abstract overview** diagram showing the top level only — the L1
+     domains, each labelled with its child count as a roll-up — this is the
+     "abstract" diagram;
+  2. emit **refinement** diagrams, one **per L1 domain**, each showing that
+     domain's L2 sub-hierarchy (and its L3 detail when defined). Every
+     refinement diagram respects the **≤ 12 elements/layer gate**; a refinement
+     that still exceeds 12 is refined further level-by-level (per sub-domain)
+     **split** the densest one at a natural **capability-domain** (or
+     sub-domain) boundary into a further sequenced `ARCH` document — the ≤ 12
+     gate is never violated and no element is silently dropped;
+  3. cross-link abstract ↔ refinement in Linked Artifacts (abstract → "expand
+     this domain" → refinement).
+
+Each diagram renders to a self-contained `.svg` (pinned `plantuml-1.2026.8.jar
+-tsvg`, offline). The inline PlantUML source is the source of truth.
+
+This view is additive: the Mermaid mindmap and the capability→target realization
+view are retained, not replaced.
+
+## Render the ArchiMate view(s) to self-contained SVG(s)
+
+PlantUML does not render in GitHub markdown, so each ArchiMate view above (the demanded base view, and any companion view) is delivered as a rendered **self-contained `.svg`** — the inline PlantUML source above stays the source of truth:
+
+1. Render offline with the pinned build: `java -jar plantuml-1.2026.8.jar -tsvg <view>.puml` (no public server, no URL-include path).
+2. The rendered `.svg` is the **only new rendered file** for the view; do not create a new architecture document file to host the view (the inline PlantUML source is retained).
+3. Verify self-containment before delivery: no `http(s)` URL other than the W3C `2000/svg` / `1999/xlink` namespace declarations, `xlink:href` limited to local `#anchors`, and the SVG opens and renders fully offline.
+4. Notation + rendering reference: § Diagram Production Policy + § Offline Self-Contained SVG Rendering in `skills/plantuml-syntax/references/archimate.md`.
 
 ## Suggested Next Steps
 

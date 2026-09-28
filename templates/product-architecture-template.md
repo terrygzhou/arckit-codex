@@ -1,6 +1,6 @@
 # Product Architecture Template (O-AA)
 
-> **Standard:** Open Agile Architecture™ (O-AA, C208) — Learning Unit 7: Product Architecture
+> **Standard:** Open Agile Architecture™ (O-AA, C208) — Ch. 14 (Product Architecture)
 > **Organisation:** ${user_config.organisation_name}
 > **Parent reference:** ${user_config.references_dir} — parent engagement reference, if any
 > **TOGAF Mapping:** ADM Phase B (Business) + Phase C (Information Systems) + Phase E (Opportunities)
@@ -674,6 +674,40 @@ compliance:
 
 ## References
 
-- O-AA Standard (C208): The Open Group Agile Architecture — Learning Unit 7
+- O-AA Standard (C208): The Open Group Agile Architecture — Ch. 14 (Product Architecture)
 
 - ${user_config.references_dir} — organisation reference documents (e.g. Executable TOGAF ADM Workflow, OAA Study Notes, Compliance Validation Pipeline, Cross-Border Regulatory Mapping Tool); list only documents that exist in the configured directory, using relative paths
+
+## PlantUML ArchiMate View
+
+**Layer focus**: Application
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> This view is additive; the Mermaid diagram(s) above are unchanged.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {diagram_title}
+
+LAYOUT_TOP_DOWN()
+
+' Elements
+{plantuml_elements}
+
+' Relationships (realization concrete->abstract; serving/flow/access)
+{plantuml_relationships}
+
+' Layout constraints (hidden placement edges)
+{plantuml_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.

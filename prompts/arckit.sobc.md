@@ -109,7 +109,7 @@ This command creates a **Strategic Outline Business Case (SOBC)** following HM T
 
    **Run the intake interview**:
 
-   - Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, ask only what remains unknown (one question at a time, each skippable), and persist answers.
+   - Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user one at a time (**ask-always, answer-optional** — the interview must ask; each answer is optional and may be skipped, rendering as a `TBD` marker when skipped), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
    **Read the template** (with user override support):
    - **First**, check if `.arckit/templates-custom/sobc-template.md` exists in the project root
@@ -303,6 +303,7 @@ Provide:
 4. **Traceability note**:
    - "All [X] benefits traced to stakeholder goals in ARC-{PROJECT_ID}-STKE-v*.md"
    - "All [Y] risks linked to stakeholder conflict analysis"
+   - "**BMM** cross-reference (UK regime, HM Treasury Green Book 5-case model): when a **BMM** (Business Motivation Model) exists for the project, map its *Case For / Case Against* section to the Strategic Case (case for change) and Economic Case (options appraisal / benefits), and its *Assumptions* and *Impact Factors* to the Management Case risks; cite the BMM document by ID in External References"
 
 ## Common Patterns
 

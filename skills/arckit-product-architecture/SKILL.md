@@ -3,7 +3,7 @@ name: arckit-product-architecture
 description: "Design product-centric architecture — cross-functional teams, backlog-driven delivery, product mission and outcomes"
 ---
 
-You are helping an enterprise architect create an **Agile Product Architecture** document using Open Agile Architecture (O-AA, C208) Learning Unit 7: Product Architecture. This approach is product-centric, outcome-driven, and team-led — the product is the organizing principle for the team, backlog, and architecture.
+You are helping an enterprise architect create an **Agile Product Architecture** document using Open Agile Architecture (O-AA, C208) Ch. 14 (Product Architecture). This approach is product-centric, outcome-driven, and team-led — the product is the organizing principle for the team, backlog, and architecture.
 
 ## User Input
 
@@ -79,7 +79,7 @@ Read `.arckit/skills/mermaid-syntax/references/c4.md` for official Mermaid synta
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 - Load the OAA discovery-dimension checklist `.arckit/references/intake-discovery-dimensions.md` (D1–D10) and use it as the canonical coverage floor in addition to the shared block's §2 template-derived questions: a dimension resolvable from existing artefacts, `.arckit/intake/`, `user_config`, or `shared.json` is surfaced prefilled for confirmation/override (ask-always, answer-optional); a dimension with no source is asked as a grouped, skippable question (a skipped question renders a `TBD` marker); the checklist adds no diagram or output mandate.
 
@@ -95,7 +95,7 @@ Read `.arckit/skills/mermaid-syntax/references/c4.md` for official Mermaid synta
 
 ### 4. O-AA Product Architecture Framework
 
-O-AA Learning Unit 7 (Product Architecture) establishes that:
+C208 Ch. 14 (Product Architecture) establishes that:
 
 - **Product-centric**: The product is the organizing principle for the team, backlog, and architecture — not projects, not capabilities, not services
 
@@ -213,6 +213,8 @@ After writing the file, show a concise summary (NOT the full document):
 ### Shared Schemas
 - ✅ product-architecture.json → schemas/product-architecture.json
 
+The schemas ship with this plugin in `schemas/` (9 shared architecture schemas); validate artifacts with `python3 validate-architecture.py <artifact> --phase <phase>` — see `schemas/README.md`.
+
 - ✅ vision.yaml → schemas/vision.json (shared with O-AA Lite)
 
 ### Synthesised From
@@ -244,6 +246,25 @@ After writing the file, show a concise summary (NOT the full document):
 5. **Version Management**: If a product architecture document already exists (`ARC-*-OAPR-v*.md`), create a new version (v2.0) rather than overwriting.
 
 6. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji.
+
+## PlantUML ArchiMate View (additive)
+
+When the artefact content is **ArchiMate-representable** (a layer/tier, capability, service, application or technology component, or a motivation element — driver/goal/constraint), add a PlantUML-ArchiMate view to the generated artefact:
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `## PlantUML ArchiMate View` block in the template, stereotyped into the **Application** layer focus.
+3. Quality gates: single-layer stereotyping; ≤ 12 elements per layer; realization edges point concrete → abstract; no unlabelled cross-layer edges.
+
+This is additive — the existing Mermaid C4 component diagram are retained, not replaced.
+
+## Render the ArchiMate view(s) to self-contained SVG(s)
+
+PlantUML does not render in GitHub markdown, so each ArchiMate view above (the demanded base view, and any companion view) is delivered as a rendered **self-contained `.svg`** — the inline PlantUML source above stays the source of truth:
+
+1. Render offline with the pinned build: `java -jar plantuml-1.2026.8.jar -tsvg <view>.puml` (no public server, no URL-include path).
+2. The rendered `.svg` is the **only new rendered file** for the view; do not create a new architecture document file to host the view (the inline PlantUML source is retained).
+3. Verify self-containment before delivery: no `http(s)` URL other than the W3C `2000/svg` / `1999/xlink` namespace declarations, `xlink:href` limited to local `#anchors`, and the SVG opens and renders fully offline.
+4. Notation + rendering reference: § Diagram Production Policy + § Offline Self-Contained SVG Rendering in `skills/plantuml-syntax/references/archimate.md`.
 
 ## Suggested Next Steps
 

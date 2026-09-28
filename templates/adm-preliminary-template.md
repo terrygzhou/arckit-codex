@@ -25,16 +25,26 @@ override it. Each question is **optional**: a skipped question renders as a
 - **Constraints:** What budget, timeline, jurisdictional/regulatory, and dependency constraints apply?
 - **Goals:** What success criteria or measurable outcomes define a successful architecture?
 - **Governance:** How will architectural decisions be governed and approved?
+- **Engagement scope:** What is the scope of this ADM engagement? Options: `Enterprise-wide` | `Business Unit` | `Project-specific` (default: `Business Unit`).
 
 ## Document Control
 
 | Field | Value |
 |-------|-------|
 | Document ID | `ARC-[PROJECT_ID]-ADMP-v[VERSION]` |
+| Document Type | ADM Preliminary |
 | Project | `[PROJECT_NAME]` |
-| Owner | `[OWNER_NAME_AND_ROLE]` |
 | Classification | `[CLASSIFICATION]` |
 | Status | DRAFT |
+| Version | `[VERSION]` |
+| Created Date | `[YYYY-MM-DD]` |
+| Last Modified | `[YYYY-MM-DD]` |
+| Review Cycle | Monthly during active ADM cycle |
+| Next Review Date | `[YYYY-MM-DD]` |
+| Owner | `[OWNER_NAME_AND_ROLE]` |
+| Reviewed By | `[REVIEWER_NAME]` |
+| Approved By | `[APPROVER_NAME]` |
+| Distribution | `[DISTRIBUTION_LIST]` |
 | Created | `[YYYY-MM-DD]` |
 | Review Date | `[YYYY-MM-DD]` |
 
@@ -153,3 +163,37 @@ C4Context
 **Generated on**: `[DATE] [TIME] GMT`
 **ArcKit Version**: `{ARCKIT_VERSION}`
 **Project**: `[PROJECT_NAME]` (Project `[PROJECT_ID]`)
+
+## PlantUML ArchiMate View
+
+**Layer focus**: Strategy (scope / drivers)
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> This view is additive; the Mermaid diagram(s) above are unchanged.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {diagram_title}
+
+LAYOUT_TOP_DOWN()
+
+' Elements
+{plantuml_elements}
+
+' Relationships (realization concrete->abstract; serving/flow/access)
+{plantuml_relationships}
+
+' Layout constraints (hidden placement edges)
+{plantuml_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.

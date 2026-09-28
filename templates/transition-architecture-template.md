@@ -23,6 +23,10 @@ override it. Each question is **optional**: a skipped question renders as a
 - **Exit criteria:** What must be true at each milestone gate to proceed?
 - **Enablers:** What organizational enablers (training, funding, governance) are required in transition?
 - **Risk:** What is the top transition risk, and what is its mitigation?
+- **Transition waves:** How many transition architectures (migration waves) should the plan cover? Options: `2 waves` | `3 waves (Recommended)` | `4 waves` (default: `3 waves`):
+  - **2 waves**: Simple transition — baseline → intermediate → target. Suitable for focused, short-duration programmes (≤12 months).
+  - **3 waves (Recommended)**: Balanced transition — baseline → Architecture 2 → Architecture 3 → target. Most common for enterprise transformations (12–36 months).
+  - **4 waves**: Granular transition — baseline → Architecture 2 → Architecture 3 → Architecture 4 → target. Suitable for complex, long-duration programmes (24–48 months) with many interdependencies.
 
 ## Document Control
 
@@ -34,7 +38,7 @@ override it. Each question is **optional**: a skipped question renders as a
 | Classification | `[CLASSIFICATION]` |
 | Status | DRAFT |
 | Version | `[VERSION]` |
-| Created | `[YYYY-MM-DD]` |
+| Created Date | `[YYYY-MM-DD]` |
 | Last Modified | `[YYYY-MM-DD]` |
 | Review Cycle | Monthly during active migration, quarterly after migration |
 | Next Review Date | `[YYYY-MM-DD]` |
@@ -302,3 +306,70 @@ flowchart TD
 **Project**: `[PROJECT_NAME]` (Project `[PROJECT_ID]`)
 **AI Model**: `[MODEL_NAME]`
 **Generation Context**: [Brief note about source documents used]
+
+## PlantUML ArchiMate View
+
+**Layer focus**: Capability (incremental target)
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> This view is additive; the Mermaid diagram(s) above are unchanged.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {diagram_title}
+
+LAYOUT_TOP_DOWN()
+
+' Elements
+{plantuml_elements}
+
+' Relationships (realization concrete->abstract; serving/flow/access)
+{plantuml_relationships}
+
+' Layout constraints (hidden placement edges)
+{plantuml_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.
+
+### PlantUML ArchiMate Companion View (Implementation & Migration)
+
+**Layer focus**: Implementation & Migration
+
+> Notation: PlantUML ArchiMate standard library — pinned `!include <archimate/Archimate>` (PlantUML 1.2026.8).
+> Companion view: a separate sequenced `ARCH` document — additive to the base view above, never merged into it.
+
+```plantuml
+@startuml
+!include <archimate/Archimate>
+
+title {transition_architecture_impl_migration_title}
+
+LAYOUT_TOP_DOWN()
+
+' Companion layer elements
+{companion_impl_migration_elements}
+
+' Realization/relationship edges (concrete->abstract)
+{companion_impl_migration_relationships}
+
+{companion_impl_migration_layout}
+
+@enduml
+```
+
+**View this diagram** (PlantUML does NOT render in GitHub markdown):
+
+- **CLI**: `java -jar plantuml.jar <file>.puml`
+- **Public server**: https://www.plantuml.com/plantuml/uml/ (keep the view small; never inline the stdlib into the URL source)
+- **Notation reference**: `skills/plantuml-syntax/references/archimate.md`
+- **Artefact delivery**: the view is shipped as a rendered **self-contained `.svg`** (offline, pinned build `plantuml-1.2026.8.jar -tsvg`; no external URLs, fully offline-openable); the inline PlantUML source above is retained as the source of truth.

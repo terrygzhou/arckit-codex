@@ -207,6 +207,7 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | ROAD | `ARC-*-ROAD-*.md` | Roadmap |
 | | STRAT | `ARC-*-STRAT-*.md` | Architecture Strategy |
 | | BKLG | `ARC-*-BKLG-*.md` | Product Backlog |
+| | BMM | `ARC-*-BMM-*.md` | Business Motivation Model |
 | **Planning (Community-contributed — OAA Overlay)** | | | |
 | | OASTR | `ARC-*-OASTR-*.md` | Agile Strategy |
 | **Architecture** | | | |
@@ -217,6 +218,7 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | WARD | `ARC-*-WARD-*.md` | Wardley Map |
 | | DIAG | `ARC-*-DIAG-*.md` | Architecture Diagrams |
 | | DFD | `ARC-*-DFD-*.md` | Data Flow Diagram |
+| | ARCH | `ARC-*-ARCH-*.md` | ArchiMate View |
 | | ADR | `ARC-*-ADR-*.md` | Architecture Decision Records |
 | | WDOC | `ARC-*-WDOC-*.md` | Wardley Doctrine Assessment |
 | | WGAM | `ARC-*-WGAM-*.md` | Wardley Gameplay Analysis |

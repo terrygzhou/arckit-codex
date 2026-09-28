@@ -72,7 +72,7 @@ Read `.arckit/skills/mermaid-syntax/references/flowchart.md` for official Mermai
 
 **Run the intake interview**:
 
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers. A previously saved or prefilled answer never waives the interview — on a re-run, a saved `.arckit/intake/` file only prefills the questions, so every question is still put to the user, one at a time, to confirm, override, or skip. Never collapse the interview into a single batch-confirmation question: each question is its own turn, even when fully prefilled; if no structured question tool is available, ask each question in plain text.
 
 - Load the OAA discovery-dimension checklist `.arckit/references/intake-discovery-dimensions.md` (D1–D10) and use it as the canonical coverage floor in addition to the shared block's §2 template-derived questions: a dimension resolvable from existing artefacts, `.arckit/intake/`, `user_config`, or `shared.json` is surfaced prefilled for confirmation/override (ask-always, answer-optional); a dimension with no source is asked as a grouped, skippable question (a skipped question renders a `TBD` marker); the checklist adds no diagram or output mandate.
 
@@ -100,21 +100,27 @@ The O-AA ADM Lite maps the TOGAF ADM cycle to agile sprints:
 
 ### 5. O-AA Axiom Alignment
 
-Every O-AA deliverable must reference the relevant O-AA axioms:
+Every O-AA deliverable must reference the relevant O-AA axioms. C208 Ch. 9 defines exactly 16 named axioms (§9.1–§9.16); `oaa-adm-lite` applies axioms 1–10 to the ADM Lite mapping:
 
-- **Axiom 1:** "The purpose of architecture is to improve the organisation."
+- **Axiom 1 (Customer Experience Focus)** — architecture enables delivery of a differentiated customer experience by analyzing enterprise-to-customer interactions
 
-- **Axiom 2:** "An organisation cannot have a strategy without an architecture."
+- **Axiom 2 (Outside-In Thinking)** — discover hidden, untold customer needs (jobs-to-be-done, journey mapping, design thinking) before scoping work
 
-- **Axiom 3:** "Architecture must be product-centric."
+- **Axiom 3 (Rapid Feedback Loops)** — verify customer and user assumptions early and often (OODA, PDCA, prototyping at any stage)
 
-- **Axiom 4:** "Architecture must be fit for purpose."
+- **Axiom 4 (Touchpoint Orchestration)** — orchestrate every enterprise and ecosystem touchpoint holistically, not point by point
 
-- **Axiom 5:** "Architecture is a means to an end, not an end in itself."
+- **Axiom 5 (Value Stream Alignment)** — specify value from the customer's standpoint; one value stream per product or service family
 
-- **Axiom 6:** "Architecture is a shared asset."
+- **Axiom 6 (Autonomous Cross-Functional Teams)** — segment delivery into autonomous cross-functional teams; team autonomy is a prerequisite to speed
 
-- **Axiom 7:** "Architecture is the property of the whole organisation."
+- **Axiom 7 (Authority, Responsibility, and Accountability Distribution)** — balance freedom with responsibility and accountability at every layer
+
+- **Axiom 8 (Loosely-Coupled Systems)** — favour loosely-coupled, modular architectures; modularity shortens development time and increases product flexibility
+
+- **Axiom 9 (Modular Data Platform)** — domains own and serve their own data; a centralized monolithic data platform is an anti-pattern
+
+- **Axiom 10 (Simple Common Operating Principles)** — one set of simple mechanisms for all elements and connections (e.g., standard APIs)
 
 ### 6. Shared Schema Definitions
 
@@ -224,6 +230,8 @@ After writing the file, show a concise summary (NOT the full document):
 ### Shared Schemas
 - ✅ vision.yaml → schemas/vision.json
 
+The schemas ship with this plugin in `schemas/` (9 shared architecture schemas); validate artifacts with `python3 validate-architecture.py <artifact> --phase <phase>` — see `schemas/README.md`.
+
 - ✅ implementation-strategy.yaml → schemas/implementation-strategy.json
 
 ### O-AA Axioms Applied
@@ -249,13 +257,42 @@ After writing the file, show a concise summary (NOT the full document):
 
 2. **Shared Schemas**: The `vision.yaml` and `implementation-strategy.yaml` schemas are shared between O-AA and traditional TOGAF commands. This ensures consistency regardless of which approach the client selects.
 
-3. **Product-Centric**: O-AA mandates product-centric architecture (Axiom 3). The organizing principle is the product, not capabilities or services.
+3. **Product-Centric**: O-AA mandates product-centric architecture (Axiom 15: Project to Product Shift). The organizing principle is the product, not capabilities or services.
 
 4. **Use Write Tool**: The O-AA ADM Lite document is typically 150-300 lines. ALWAYS use the Write tool to create it.
 
 5. **Version Management**: If an O-AA ADM Lite document already exists (`ARC-*-OAAL-v*.md`), create a new version (v2.0) rather than overwriting.
 
 6. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji.
+
+## PlantUML ArchiMate View (additive)
+
+When the artefact content is **ArchiMate-representable** (a layer/tier, capability, service, application or technology component, or a motivation element — driver/goal/constraint), add a PlantUML-ArchiMate view to the generated artefact:
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `## PlantUML ArchiMate View` block in the template, stereotyped into the **Technology + Application** layer focus.
+3. Quality gates: single-layer stereotyping; ≤ 12 elements per layer; realization edges point concrete → abstract; no unlabelled cross-layer edges.
+
+This is additive — the existing `data-flow-diagram.mmd` Mermaid deliverable are retained, not replaced.
+
+## PlantUML ArchiMate Companion View (Physical, additive)
+
+When the artefact content supports a **Physical** companion view, add a **separate** PlantUML-ArchiMate companion view to the generated artefact (a separate sequenced `ARCH` document, not merged into the base view above):
+
+1. Load `.arckit/skills/plantuml-syntax/references/archimate.md` (pinned `!include <archimate/Archimate>`, PlantUML 1.2026.8) for notation.
+2. Fill the `### PlantUML ArchiMate Companion View (Physical)` block in the `oaa-adm-lite` template (`{companion_physical_elements}`, `{companion_physical_relationships}`, `{companion_physical_layout}`).
+3. Quality gates: separate `ARCH` document; ≤ 12 elements per layer; realization edges point concrete → abstract; split-never-drop (reduce to the most material elements or split into another `ARCH` doc, never silently drop).
+
+This is additive — the demanded base view and existing Mermaid diagram(s) are retained, not replaced.
+
+## Render the ArchiMate view(s) to self-contained SVG(s)
+
+PlantUML does not render in GitHub markdown, so each ArchiMate view above (the demanded base view, and any companion view) is delivered as a rendered **self-contained `.svg`** — the inline PlantUML source above stays the source of truth:
+
+1. Render offline with the pinned build: `java -jar plantuml-1.2026.8.jar -tsvg <view>.puml` (no public server, no URL-include path).
+2. The rendered `.svg` is the **only new rendered file** for the view; do not create a new architecture document file to host the view (the inline PlantUML source is retained).
+3. Verify self-containment before delivery: no `http(s)` URL other than the W3C `2000/svg` / `1999/xlink` namespace declarations, `xlink:href` limited to local `#anchors`, and the SVG opens and renders fully offline.
+4. Notation + rendering reference: § Diagram Production Policy + § Offline Self-Contained SVG Rendering in `skills/plantuml-syntax/references/archimate.md`.
 
 ## Suggested Next Steps
 
