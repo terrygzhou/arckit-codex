@@ -51,15 +51,7 @@ $ARGUMENTS
 
 Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills/mermaid-syntax/references/c4.md` for official Mermaid syntax — flowchart node shapes, edge labels, and C4 component diagram syntax. Diagrams in this artefact MUST follow the reference syntax.
 
-### 4. Load Mermaid Syntax References
-
-Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills/mermaid-syntax/references/c4.md` for official Mermaid syntax — flowchart node shapes, edge labels, and C4 component diagram syntax. Diagrams in this artefact MUST follow the reference syntax.
-
-### 5. Read the template
-
-**Run the intake interview**:
-
-- Run the intake interview per `.arckit/references/intake-instructions.md` — derive required inputs from the effective template and MANDATORY prerequisites, prefill from existing sources, put **every** intake question to the user for their input one at a time (each question is optional and may be skipped; a skipped question renders as a `TBD` marker), and persist the answers.
+### 4. Read the template
 
 **Run the intake interview**:
 
@@ -73,7 +65,7 @@ Read `.arckit/skills/mermaid-syntax/references/flowchart.md` and `.arckit/skills
 
 > **Tip**: Users can customize templates with `/arckit:customize agent-design`
 
-### 6. Gather agent design information
+### 5. Gather agent design information
 
 **Agent identity and purpose**:
 
@@ -119,7 +111,7 @@ Extract from REQ artifacts or define new:
 - **Integration tests**: End-to-end agent flow
 - **Security tests**: Prompt injection, jailbreak resistance
 
-### 7. Auto-Populate from Existing Artifacts
+### 6. Auto-Populate from Existing Artifacts
 
 **CRITICAL**: To create a high-quality, integrated agent design, extract data from existing ArcKit artifacts:
 
@@ -155,7 +147,7 @@ If `projects/{project_id}/ARC-*-STKE-*.md` exists:
 - **Operators** → Monitoring requirements, admin capabilities
 - **Governance** → Approval workflows, audit requirements
 
-### 8. Detect Version
+### 7. Detect Version
 
 Before generating the document ID, check if a previous version exists:
 
@@ -169,7 +161,7 @@ Before generating the document ID, check if a previous version exists:
 4. Use the determined version for document ID, filename, Document Control, and Revision History
 5. For v1.1+/v2.0+: Add a Revision History entry describing what changed from the previous version
 
-### 9. Construct Document Control Metadata
+### 8. Construct Document Control Metadata
 
 - **Document ID**: `ARC-{PROJECT_ID}-AAGR-v{VERSION}` (e.g., `ARC-001-AAGR-v1.0`)
 
@@ -185,7 +177,7 @@ Before generating the document ID, check if a previous version exists:
 - `generation_date`: Current date and time
 - `ai_model`: Your model name
 
-### 10. Generate Agent Architecture Specification
+### 9. Generate Agent Architecture Specification
 
 **CRITICAL INSTRUCTIONS FOR QUALITY**:
 
@@ -241,7 +233,7 @@ Before generating the document ID, check if a previous version exists:
    - All diagrams must use consistent styling
    - Include element descriptions in `Person()`, `Component()`, etc.
 
-### 11. Quality Checks
+### 10. Quality Checks
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **AAGR** per-type checks pass. Fix any failures before proceeding.
 
@@ -256,7 +248,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 - **Testing strategy**: At least 3 test types covered (Unit, Integration, Security)
 - **No placeholder text**: No remaining `[Name]`, `[Model]`, `[MCP servers]`, or `[Schema]` tokens
 
-### 12. Use Write tool to create the agent design file
+### 11. Use Write tool to create the agent design file
 
 - **CRITICAL**: Because agent designs are large documents (600-1200+ lines), you MUST use the Write tool to create the file
 - Do NOT output the full content in your response (this will exceed token limits)
@@ -302,7 +294,7 @@ The footer should be populated with:
 **Generation Context**: [Brief note about source documents used]
 ```
 
-### 13. Show summary to user (NOT full document)
+### 12. Show summary to user (NOT full document)
 
 ```markdown
 ## Agent Architecture Specification Created
